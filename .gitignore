@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.npm-cache/
+preview-*.png
+
+.env
+.env.*
+!.env.example
+*.log

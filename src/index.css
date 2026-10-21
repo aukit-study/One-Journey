@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@theme {
+  --color-journey-canvas: #faf7f3;
+  --color-journey-ink: #27221f;
+  --color-journey-orange: #f4772d;
+  --color-journey-green: #299d63;
+}
