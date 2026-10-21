@@ -34,6 +34,20 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}button:fo
 .nav-icon,.stat-icon,.quick-link-icon,.activity-mark{font-size:0}
 .icon-action{display:grid;place-items:center}
 
+/* More dimensional institutional dashboard hero. */
+.welcome-banner{min-height:246px;border:1px solid rgba(255,255,255,.48);background:radial-gradient(ellipse at 83% 14%,rgba(255,242,211,.5),transparent 28%),radial-gradient(ellipse at 52% 112%,rgba(255,189,99,.5),transparent 35%),linear-gradient(112deg,#f56824 0%,#fa792e 37%,#ff9b4e 72%,#ffc57d 100%);box-shadow:0 17px 38px rgba(196,84,30,.17),inset 0 1px 0 rgba(255,255,255,.25)}
+.welcome-banner:before{width:510px;height:510px;right:23%;top:-385px;background:rgba(255,255,255,.1);box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.welcome-banner:after{background:linear-gradient(90deg,rgba(209,75,25,.12),transparent 54%,rgba(255,239,206,.12))}
+.welcome-copy h1{text-shadow:0 2px 16px rgba(148,56,16,.12)}
+.welcome-art{width:min(56%,620px);right:1%;filter:drop-shadow(0 8px 18px rgba(127,61,25,.1))}
+.welcome-art svg{max-height:236px}
+.welcome-chip{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.18);backdrop-filter:blur(5px)}
+.account-menu-wrap{display:flex;align-items:center}
+.account-menu-wrap .top-user{height:48px;border-radius:12px;transition:background .15s}
+.account-menu-wrap .top-user:hover,.account-menu-wrap .top-user[aria-expanded="true"]{background:#fff7f0}
+@media(max-width:1180px){.welcome-banner{min-height:226px}.welcome-art{width:53%}}
+@media(max-width:560px){.welcome-banner{min-height:225px}.welcome-art{width:63%;right:-4%;filter:none}}
+
 /* Tailwind Preflight removes the browser's default dialog centering margins. */
 .modal{position:fixed;inset:0;margin:auto}
 

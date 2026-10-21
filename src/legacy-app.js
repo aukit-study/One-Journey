@@ -1167,8 +1167,6 @@
   $('#mobileMenu').addEventListener('click',()=>$('#sidebar').classList.toggle('open'));
   $('#globalSearch').addEventListener('submit',event=>{event.preventDefault();const query=$('#globalSearchInput').value.trim();if(!query){toast('พิมพ์คำค้นก่อน');return;}currentGlobalQuery=query;currentRoute='search';render();});
   window.addEventListener('hashchange',()=>{const route=location.hash.replace('#','')||'overview';if(route!==currentRoute){currentRoute=route;render();}});
-  $('#profileButton').addEventListener('click',()=>toast('บัญชี Admin DII เป็นบัญชีตัวอย่าง ยังไม่มีระบบยืนยันตัวตนจริง'));
-  $('#topUser').addEventListener('click',()=>toast('การเข้าสู่ระบบอีเมล/รหัสผ่านจะเชื่อมกับระบบหลังบ้านในขั้นถัดไป'));
   $('#notificationButton').addEventListener('click',()=>toast('ไม่มีการแจ้งเตือนใหม่ในข้อมูลตัวอย่าง'));
   // Reserve the legacy window property before an element with id="entitySearch" is rendered.
   // Browsers otherwise expose that input as window.entitySearch and overwrite this search value.

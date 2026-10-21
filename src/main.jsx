@@ -7,5 +7,6 @@ import '@fontsource/ibm-plex-sans-thai/600.css';
 import '@fontsource/ibm-plex-sans-thai/700.css';
 import './index.css';
 import './legacy.css';
+import './auth.css';
 
 createRoot(document.getElementById('root')).render(<App />);
