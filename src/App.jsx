@@ -49,7 +49,7 @@ function Topbar() {
     <header className="topbar">
       <div className="breadcrumb">
         <button className="icon-button mobile-menu" id="mobileMenu" type="button" aria-label="เปิดเมนู"><Icon name="menu" /></button>
-        <span>One Journey</span><b>/</b><strong id="breadcrumbTitle">หน้าหลัก</strong>
+        <a className="breadcrumb-home" href="#overview">One Journey</a><b>/</b><strong id="breadcrumbTitle">หน้าหลัก</strong>
       </div>
       <form className="global-search" id="globalSearch">
         <span aria-hidden="true"><Icon name="search" size={19} /></span>
@@ -57,7 +57,7 @@ function Topbar() {
         <button type="submit">ค้นหา</button>
       </form>
       <div className="top-actions">
-        <button className="icon-button notification-button" id="notificationButton" type="button" aria-label="การแจ้งเตือน"><Icon name="bell" /><i /></button>
+        <button className="icon-button notification-button" id="notificationButton" type="button" aria-label="การแจ้งเตือน"><Icon name="bell" /></button>
         <button className="top-user" id="topUser" type="button">
           <span className="avatar small">AD</span>
           <span><strong>Admin DII</strong><small>วิทยาลัย CAMT</small></span>
