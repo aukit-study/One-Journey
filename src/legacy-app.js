@@ -54,17 +54,19 @@
     members: {title:'ข้อมูลเบื้องต้นลูกค้าสัมพันธ์', singular:'ลูกค้า', description:'ทะเบียนข้อมูลติดต่อและกลุ่มความสัมพันธ์ของบุคคลหรือองค์กร เพื่อเชื่อมต่อกับกิจกรรมและข้อมูล A0–D', columns:[['customerCode','รหัสรายการ'],['prefix','คำนำหน้า'],['firstName','ชื่อ'],['lastName','นามสกุล'],['customerType','ประเภทข้อมูล'],['groups','กลุ่ม'],['phone','เบอร์โทร'],['email','Email'],['lineId','Line ID'],['province','จังหวัด'],['country','ประเทศ'],['affiliation','หน่วยงาน/โรงเรียน/บริษัท'],['owner','ผู้รับผิดชอบ']], fields:[
       {key:'customerCode',label:'รหัสรายการ',type:'text',required:true,autoCode:true},{key:'prefix',label:'คำนำหน้า',type:'select',options:['นาย','นาง','นางสาว','เด็กชาย','เด็กหญิง','ดร.','อื่น ๆ']},{key:'firstName',label:'ชื่อ / ชื่อผู้ประสานงาน',type:'text',required:true},{key:'lastName',label:'นามสกุล',type:'text'},{key:'customerType',label:'ประเภทข้อมูล',type:'radio-group',options:['บุคคล','องค์กร'],required:true},{key:'phone',label:'เบอร์โทรศัพท์',type:'tel'},{key:'email',label:'Email',type:'email'},{key:'lineId',label:'Line ID',type:'text'},{key:'province',label:'จังหวัด',type:'text'},{key:'country',label:'ประเทศ',type:'select',options:['ไทย','สิงคโปร์','มาเลเซีย','ญี่ปุ่น','เกาหลีใต้','ออสเตรเลีย','สหรัฐอเมริกา','อื่น ๆ']},{key:'affiliation',label:'หน่วยงาน/โรงเรียน/บริษัท',type:'text',wide:true},{key:'owner',label:'ผู้รับผิดชอบ',type:'select',options:['น.ส. ศิริวรรณ จันทร์ดี','น.ส. ศิริวรรณ จันทร์ดี (ตัวอย่าง)','นายปริญญา จันทร์ดี','นายปริญญา จันทร์ดี (ตัวอย่าง)','น.ส. อรณิชา ใจดี','น.ส. อรณิชา ใจดี (ตัวอย่าง)','ผู้ดูแลระบบ']},{key:'groups',label:'กลุ่มลูกค้า',type:'checkbox-group',options:['A0','A1','A2','B0','B1','B2','C','D'],span:4}
     ]},
-    budgets: {title:'งบประมาณรายได้', singular:'โครงการ', description:'บันทึกยอดรายได้รวมและค่าใช้จ่ายรวม พร้อมคำนวณกำไร/ขาดทุนแยกเป็นรายโครงการ', columns:[['code','รหัสงบ'],['projectName','ชื่อโครงการ'],['incomeTotal','รายได้รวม (บาท)'],['expenseTotal','ค่าใช้จ่ายรวม (บาท)'],['net','กำไร/ขาดทุน (บาท)'],['type','ประเภทงาน'],['status','สถานะ'],['owner','ผู้รับผิดชอบ']], fields:[
-      {key:'code',label:'รหัสงบ',type:'text',required:true},{key:'projectName',label:'ชื่อโครงการ',type:'text',required:true},{key:'incomeTotal',label:'รายได้รวม (บาท)',type:'number',required:true},{key:'expenseTotal',label:'ค่าใช้จ่ายรวม (บาท)',type:'number',required:true},{key:'type',label:'ประเภทงาน',type:'select',options:['กิจกรรมประชาสัมพันธ์','Workshop','Camp','Short Course','อื่น ๆ'],required:true},{key:'owner',label:'ผู้รับผิดชอบ',type:'text',required:true}
-    ]},
+    budgets: {
+      title: 'งบประมาณรายได้', singular: 'โครงการ', description: 'บันทึกยอดรายได้รวมและค่าใช้จ่ายรวม พร้อมคำนวณกำไร/ขาดทุนแยกเป็นรายโครงการ', columns: [['code', 'รหัสงบ'], ['projectName', 'ชื่อโครงการ'], ['activityId', 'กิจกรรมที่เกี่ยวข้อง'], ['incomeTotal', 'รายได้รวม (บาท)'], ['expenseTotal', 'ค่าใช้จ่ายรวม (บาท)'], ['net', 'กำไร/ขาดทุน (บาท)'], ['type', 'ประเภทงาน'], ['status', 'สถานะ'], ['owner', 'ผู้รับผิดชอบ'], ['approvalDocument', 'เอกสารอนุมัติ'], ['receiptDocument', 'เอกสารใบเสร็จ']], fields: [
+        { key: 'code', label: 'รหัสงบ', type: 'text', required: true }, { key: 'projectName', label: 'ชื่อโครงการ', type: 'text', required: true }, { key: 'incomeTotal', label: 'รายได้รวม (บาท)', type: 'number', required: true }, { key: 'expenseTotal', label: 'ค่าใช้จ่ายรวม (บาท)', type: 'number', required: true }, { key: 'type', label: 'ประเภทงาน', type: 'select', options: ['กิจกรรมประชาสัมพันธ์', 'Workshop', 'Camp', 'Short Course', 'อื่น ๆ'], required: true }, { key: 'owner', label: 'ผู้รับผิดชอบ', type: 'text', required: true }, { key: 'activityId', label: 'กิจกรรมที่เกี่ยวข้อง', type: 'activity' }, { key: 'approvalDocument', label: 'เอกสารอนุมัติ', type: 'file', wide: true }, { key: 'receiptDocument', label: 'เอกสารใบเสร็จ', type: 'file', wide: true }
+      ]
+    },
     agreements: {title:'MOU / MOA', singular:'บันทึกความร่วมมือ', description:'จัดการเอกสาร MOU/MOA คู่ความร่วมมือ ระยะเวลาสัญญา และรายละเอียดขอบเขตความร่วมมือ', columns:[['sequence','ลำดับ'],['agreementType','MOU/MOA'],['docNo','เลขที่เอกสาร'],['partner','Partner'],['documentStatus','สถานะเอกสาร'],['signedDate','วันที่ลงนาม'],['startDate','วันที่เริ่ม'],['endDate','วันที่หมดอายุ'],['cooperationStatus','สถานะความร่วมมือ'],['attachment','ไฟล์เอกสาร']], fields:[
       {key:'agreementType',label:'ประเภทเอกสาร',type:'select',options:['MOU','MOA'],required:true},{key:'docNo',label:'เลขที่เอกสาร',type:'text',required:true},{key:'partner',label:'Partner / ชื่อโครงการ',type:'text',required:true},{key:'signedDate',label:'วันที่ลงนาม',type:'date',required:true},{key:'startDate',label:'วันที่เริ่ม',type:'date',required:true},{key:'endDate',label:'วันที่หมดอายุ',type:'date',required:true},{key:'documentStatus',label:'สถานะเอกสาร',type:'select',options:['Active','Draft','Expired'],required:true},{key:'signerOur',label:'ผู้ลงนามฝ่ายเรา',type:'text'},{key:'signerPartner',label:'ผู้ลงนามฝ่าย Partner',type:'text'},{key:'attachment',label:'อัปโหลดไฟล์ MOU/MOA',type:'file',required:true,wide:true},{key:'documentNotes',label:'หมายเหตุเอกสาร',type:'textarea',wide:true},{key:'purpose',label:'วัตถุประสงค์ขอความร่วมมือ',type:'textarea',required:true},{key:'cooperationFormat',label:'รูปแบบความร่วมมือ',type:'select',options:['ทางวิชาการ','พัฒนาหลักสูตร','แลกเปลี่ยนนักศึกษา/บุคลากร','วิจัยและบริการวิชาการ','อื่น ๆ']},{key:'scope',label:'ขอบเขตความร่วมมือ',type:'textarea',wide:true}
     ]},
     products: {title:'โปรดัก / หลักสูตร', singular:'โปรดักหรือหลักสูตร', description:'ทะเบียนข้อมูลต้นทางของหลักสูตรและโปรดัก หนึ่งรายการเชื่อมกับกิจกรรมหรือรอบจัดได้หลายครั้ง', columns:[['name','ชื่อโปรดัก / หลักสูตร'],['type','ประเภท'],['level','ระดับ'],['branch','สาขา'],['unit','หน่วยงาน'],['status','สถานะ']], fields:[
       {key:'name',label:'ชื่อโปรดัก / หลักสูตร',type:'text',required:true},{key:'type',label:'ประเภท',type:'select',options:['หลักสูตรปริญญาตรี','หลักสูตรปริญญาโท','หลักสูตรปริญญาเอก','หลักสูตรระยะสั้น','หลักสูตรร่วม'],required:true},{key:'level',label:'ระดับ',type:'select',options:['ปริญญาตรี','ปริญญาโท','ปริญญาเอก','ระยะสั้น','ร่วม'],required:true},{key:'branch',label:'สาขา / กลุ่ม',type:'text'},{key:'unit',label:'หน่วยงานเจ้าของข้อมูล',type:'select',options:unitOptions,required:true},{key:'status',label:'สถานะ',type:'select',options:statusOptions},{key:'description',label:'รายละเอียด',type:'textarea',wide:true},{key:'expectedSkills',label:'ทักษะที่คาดว่าจะได้รับ',type:'textarea',wide:true}
     ]},
-    activities: {title:'กิจกรรม', singular:'กิจกรรม', description:'สร้างและจัดการค่าย, Workshop, Open House และกิจกรรมอื่น ๆ พร้อมรอบจัด ผู้รับผิดชอบ และจำนวนผู้เข้าร่วม', columns:[['activityCode','รหัสกิจกรรม'],['activityType','ประเภทกิจกรรม'],['name','ชื่อกิจกรรม'],['startDate','วันที่เริ่ม'],['round','รอบกิจกรรม'],['capacity','จำนวนรับ'],['participants','ลงทะเบียน'],['attended','เข้าร่วมจริง'],['status','สถานะ'],['owner','ผู้รับผิดชอบ']], fields:[
-      {key:'activityCode',label:'รหัสกิจกรรม',type:'text',required:true,autoCode:true},{key:'activityType',label:'ประเภทกิจกรรม',type:'select',options:['Open House','Workshop','Camp','กิจกรรมแนะแนว','กิจกรรมอื่น ๆ'],required:true},{key:'name',label:'ชื่อกิจกรรม',type:'text',required:true},{key:'product',label:'โปรดัก / หลักสูตรที่เกี่ยวข้อง',type:'select',options:programOptions},{key:'unit',label:'หน่วยงานผู้จัด (CAMT)',type:'select',options:unitOptions,required:true},{key:'startDate',label:'วันที่เริ่มต้น',type:'date',required:true},{key:'endDate',label:'วันที่สิ้นสุด',type:'date'},{key:'round',label:'รอบกิจกรรม',type:'select',options:['รอบที่ 1','รอบที่ 2','รอบที่ 3','ต่อเนื่อง'],required:true},{key:'venue',label:'สถานที่',type:'text'},{key:'capacity',label:'จำนวนรับ',type:'number'},{key:'audience',label:'กลุ่มเป้าหมาย',type:'text'},{key:'walkIn',label:'รับสมัครหน้างาน',type:'select',options:yesNo},{key:'checkinMethod',label:'วิธีเช็คอิน',type:'select',options:['เจ้าหน้าที่ค้นหา/บันทึก','สแกน QR โดยเจ้าหน้าที่','ผู้เข้าร่วมสแกน QR']},{key:'partner','label':'พาร์ทเนอร์',type:'text'},{key:'owner',label:'ผู้รับผิดชอบ',type:'text',required:true},{key:'status',label:'สถานะกิจกรรม',type:'select',options:['ร่าง','กำลังจะเปิด','เปิดรับสมัคร','กำลังดำเนินการ','เสร็จสิ้น','ยกเลิก'],required:true},{key:'description',label:'รายละเอียดกิจกรรม / เนื้อหา',type:'textarea',wide:true},{key:'feedback',label:'Feedback ต่อกิจกรรม',type:'textarea',wide:true}
+    activities: {title:'กิจกรรม', singular:'กิจกรรม', description:'สร้างและจัดการค่าย, Workshop, Open House และกิจกรรมอื่น ๆ พร้อมรอบจัด ผู้รับผิดชอบ และจำนวนผู้เข้าร่วม', columns:[['activityCode','รหัสกิจกรรม'],['activityType','ประเภทกิจกรรม'],['name','ชื่อกิจกรรม'],['description','รายละเอียดกิจกรรม'],['relatedDocument','เอกสารที่เกี่ยวข้อง'],['budgetSummary','งบประมาณ'],['startDate','วันที่เริ่ม'],['round','รอบกิจกรรม'],['capacity','จำนวนรับ'],['participants','ลงทะเบียน'],['attended','เข้าร่วมจริง'],['status','สถานะ'],['owner','ผู้รับผิดชอบ']], fields:[
+      {key:'activityCode',label:'รหัสกิจกรรม',type:'text',required:true,autoCode:true},{key:'activityType',label:'ประเภทกิจกรรม',type:'select',options:['Open House','Workshop','Camp','กิจกรรมแนะแนว','กิจกรรมอื่น ๆ'],required:true},{key:'name',label:'ชื่อกิจกรรม',type:'text',required:true},{key:'product',label:'โปรดัก / หลักสูตรที่เกี่ยวข้อง',type:'select',options:programOptions},{key:'unit',label:'หน่วยงานผู้จัด (CAMT)',type:'select',options:unitOptions,required:true},{key:'startDate',label:'วันที่เริ่มต้น',type:'date',required:true},{key:'endDate',label:'วันที่สิ้นสุด',type:'date'},{key:'round',label:'รอบกิจกรรม',type:'select',options:['รอบที่ 1','รอบที่ 2','รอบที่ 3','ต่อเนื่อง'],required:true},{key:'venue',label:'สถานที่',type:'text'},{key:'capacity',label:'จำนวนรับ',type:'number'},{key:'audience',label:'กลุ่มเป้าหมาย',type:'text'},{key:'walkIn',label:'รับสมัครหน้างาน',type:'select',options:yesNo},{key:'checkinMethod',label:'วิธีเช็คอิน',type:'select',options:['เจ้าหน้าที่ค้นหา/บันทึก','สแกน QR โดยเจ้าหน้าที่','ผู้เข้าร่วมสแกน QR']},{key:'partner','label':'พาร์ทเนอร์',type:'text'},{key:'owner',label:'ผู้รับผิดชอบ',type:'text',required:true},{key:'status',label:'สถานะกิจกรรม',type:'select',options:['ร่าง','กำลังจะเปิด','เปิดรับสมัคร','กำลังดำเนินการ','เสร็จสิ้น','ยกเลิก'],required:true},{key:'description',label:'รายละเอียดกิจกรรม / เนื้อหา',type:'textarea',wide:true},{key:'feedback',label:'Feedback ต่อกิจกรรม',type:'textarea',wide:true},{key:'relatedDocument',label:'เอกสารที่เกี่ยวข้อง',type:'file',wide:true}
     ]},
     a0Participants: {title:'A0 · ผู้เข้าร่วมค่าย / Workshop / Open House', singular:'ข้อมูลผู้เข้าร่วม A0', description:'ติดตามผู้เข้าร่วมรายบุคคล ความสนใจหลังจบกิจกรรม และแนวโน้มสมัครเรียน โดยเชื่อมกับสมาชิกและกิจกรรม/รอบ', columns:[['recordCode','รหัสรายการ'],['recordedDate','วันที่บันทึก'],['memberId','สมาชิก'],['activityId','กิจกรรม / รอบ'],['grade','ระดับชั้น'],['interestedProgram','หลักสูตรที่สนใจ'],['interestReason','เหตุผลที่สนใจ'],['interestScore','คะแนนความสนใจ'],['applicationIntent','แนวโน้มสมัคร'],['feedback','Feedback'],['owner','ผู้รับผิดชอบ'],['status','สถานะ']], fields:[
       {key:'recordCode',label:'รหัสรายการ',type:'text',required:true,autoCode:true},{key:'recordedDate',label:'วันที่บันทึก',type:'date',required:true},{key:'memberId',label:'สมาชิกเดิม',type:'member',required:true},{key:'activityId',label:'กิจกรรม / รอบ',type:'activity',required:true},{key:'grade',label:'ระดับชั้น',type:'select',options:['ม.4','ม.5','ม.6','ปวช.','ปวส.','อื่น ๆ']},{key:'interestedProgram',label:'หลักสูตรที่สนใจ',type:'select',options:programOptions},{key:'interestReason',label:'เหตุผลที่สนใจ',type:'textarea',wide:true},{key:'interestScore',label:'คะแนนความสนใจหลังจบกิจกรรม',type:'select',options:['1','2','3','4','5'],required:true},{key:'applicationIntent',label:'มีแนวโน้มสมัครหรือไม่',type:'select',options:['มีแนวโน้ม','ไม่แน่ใจ','ไม่มีแนวโน้ม'],required:true},{key:'feedback',label:'Feedback ต่อกิจกรรม',type:'textarea',wide:true},{key:'owner',label:'ผู้รับผิดชอบ',type:'text',required:true},{key:'status',label:'สถานะติดตาม',type:'select',options:['รอติดตาม','ติดตามแล้ว','สมัครหลักสูตรแล้ว','ไม่สนใจ'],required:true}
@@ -115,8 +117,8 @@
     ],
     budgets:[
       {id:'BUD-001',code:'BG-240001',projectName:'ค่ายทดลองเรียนสื่อดิจิทัล (ตัวอย่าง)',incomeTotal:0,expenseTotal:24800,type:'Camp',owner:'หน่วยพัฒนานักศึกษา'},
-      {id:'BUD-002',code:'BG-240002',projectName:'Workshop สร้างสรรค์ด้วย AI (ตัวอย่าง)',incomeTotal:86500,expenseTotal:0,type:'Workshop',owner:'BRIDGE'},
-      {id:'BUD-003',code:'BG-240003',projectName:'กิจกรรมแนะแนวหลักสูตร (ตัวอย่าง)',incomeTotal:150000,expenseTotal:0,type:'กิจกรรมประชาสัมพันธ์',owner:'หน่วยบริหารการศึกษา'}
+      {id:'BUD-002',code:'BG-240002',projectName:'Workshop สร้างสรรค์ด้วย AI (ตัวอย่าง)',incomeTotal:86500,expenseTotal:0,type:'Workshop',owner:'BRIDGE',activityId:'EVT-002'},
+      {id:'BUD-003',code:'BG-240003',projectName:'กิจกรรมแนะแนวหลักสูตร (ตัวอย่าง)',incomeTotal:150000,expenseTotal:0,type:'กิจกรรมประชาสัมพันธ์',owner:'หน่วยบริหารการศึกษา',activityId:'EVT-003'}
     ],
     agreements:[
       {id:'AGR-001',agreementType:'MOU',docNo:'MOU-2567-001',partner:'Singapore Global Academy',documentStatus:'Active',signedDate:'2024-06-01',startDate:'2024-06-01',endDate:'2027-05-31',signerOur:'ผู้บริหาร CAMT (ตัวอย่าง)',signerPartner:'ผู้บริหาร Singapore Global Academy (ตัวอย่าง)',attachmentName:'',documentNotes:'ข้อมูลสมมติสำหรับพัฒนา',purpose:'สร้างความร่วมมือด้านการศึกษาและสื่อสร้างสรรค์',cooperationFormat:'พัฒนาหลักสูตร',scope:'แลกเปลี่ยนองค์ความรู้และจัดกิจกรรมร่วมกัน'},
@@ -235,9 +237,20 @@
               if(row.direction==='รายจ่าย')project.expenseTotal+=Number(row.amount||0);
               if(activity&&row.id==='BUD-003'&&row.unit==='ห้องสร้างสรรค์เพื่อการเรียนรู้')project.owner=activity.unit;
             });
-            const migratedProjects=[...groups.values()].map((project,index)=>{const {activityId,...fields}=project;return{id:`BUD-${String(index+1).padStart(3,'0')}`,code:`BG-240${String(index+1).padStart(3,'0')}`,...fields};});
+            const migratedProjects=[...groups.values()].map((project,index)=>{const {activityId,...fields}=project;return{id:`BUD-${String(index+1).padStart(3,'0')}`,code:`BG-240${String(index+1).padStart(3,'0')}`,...fields,activityId};});
             parsed.data.budgets=[...budgetRows.filter(row=>!row.direction&&row.amount===undefined),...migratedProjects];
             try{localStorage.setItem(STORE_KEY,JSON.stringify(parsed));}catch(error){console.warn('Could not save migrated budget records',error);}
+          }
+          if(parsed.demo){
+            const sampleActivityLinks={'BUD-002':'EVT-002','BUD-003':'EVT-003'};
+            const activityIds=new Set((Array.isArray(parsed.data.activities)?parsed.data.activities:[]).map(activity=>activity.id));
+            let linkedSampleBudget=false;
+            parsed.data.budgets=(Array.isArray(parsed.data.budgets)?parsed.data.budgets:[]).map(row=>{
+              const activityId=sampleActivityLinks[row.id];
+              if(!row.activityId&&activityId&&activityIds.has(activityId)){linkedSampleBudget=true;return {...row,activityId};}
+              return row;
+            });
+            if(linkedSampleBudget){try{localStorage.setItem(STORE_KEY,JSON.stringify(parsed));}catch(error){console.warn('Could not link sample budgets to activities',error);}}
           }
           const agreementRows=Array.isArray(parsed.data.agreements)?parsed.data.agreements:[];
           if(agreementRows.some(row=>!row.docNo)){
@@ -421,11 +434,12 @@
     ['alumni','C · ศิษย์เก่า','graduation'],
     ['studentHistories','D · ประวัตินักเรียน','route']
   ];
-  const customerGroupRoutes=new Set(['a0Participants','applicants','jointCourses','potentialPartners','schools','intlRelations','alumni']);
+  const customerGroupRoutes=new Set(['a0Participants','applicants','jointCourses','potentialPartners','schools','intlRelations','alumni','studentHistories']);
   const customerGroups=[
     {type:'link',route:'a0Participants',label:'A',icon:'users',compact:true},
     {type:'link',route:'potentialPartners',label:'B',icon:'network',compact:true},
-    {type:'link',route:'alumni',label:'C',icon:'graduation',compact:true}
+    {type:'link',route:'alumni',label:'C',icon:'graduation',compact:true},
+    {type:'link',route:'studentHistories',label:'D',icon:'route',compact:true}
   ];
   const educationRoutes=new Set(['members','customerGroups','activities','budgets','agreements','products',...customerClassLinks.map(([route])=>route)]);
   const navActiveRoute=()=>currentRoute.startsWith('activity:')?'activities':currentRoute.startsWith('student:')?'studentHistories':currentRoute;
@@ -435,11 +449,9 @@
       {type:'link',route:'members',label:'ข้อมูลเบื้องต้นลูกค้า',icon:'user'},
       {type:'link',route:'customerGroups',label:'จัดการกลุ่มลูกค้า',icon:'users'},
       {type:'subdisclosure',id:'customer-classes',label:'กลุ่มลูกค้า',icon:'users',children:customerGroups},
-      {type:'link',route:'studentHistories',label:'D · ประวัตินักเรียน',icon:'route'},
       {type:'link',route:'activities',label:'กิจกรรม',icon:'calendar'},
       {type:'link',route:'budgets',label:'งบประมาณรายได้',icon:'wallet'},
       {type:'link',route:'agreements',label:'MOU / MOA',icon:'handshake'},
-      {type:'link',route:'products',label:'ทะเบียนโปรดัก / หลักสูตร',icon:'package'}
     ]}
   ];
   const groupTabs=[
@@ -654,10 +666,23 @@
       if(key==='cooperationStatus'){const value=agreementCooperationStatus(row);const color=value==='ดำเนินการอยู่'?'green':value==='สิ้นสุดแล้ว'?'red':'';return `<span class="tag ${color}">${value}</span>`;}
       if(key==='attachment')return row.attachmentName?`<button class="file-cell-button" type="button" data-open-agreement-file="${escapeHtml(row.id)}">${iconSvg('file',14)} ดูไฟล์</button>`:`<button class="file-cell-button file-cell-upload" type="button" data-upload-agreement-file="${escapeHtml(row.id)}">${iconSvg('upload',14)} อัปโหลด</button>`;
     }
-    if(entity==='budgets'){
-      if(key==='incomeTotal'||key==='expenseTotal')return budgetMoney(row[key]);
-      if(key==='net'){const net=budgetNet(row);return `<span class="budget-net ${net<0?'budget-negative':net>0?'budget-positive':''}">${net<0?'−':''}${budgetMoney(Math.abs(net))}</span>`;}
-      if(key==='status'){const outcome=budgetOutcome(row);const color=outcome==='มีกำไร'?'green':outcome==='ขาดทุน'?'orange':'';return `<span class="tag ${color}">${outcome}</span>`;}
+            if (entity === 'activities') {
+      if (key === 'description') return row.description ? '<span class="activity-description-cell" title="' + escapeHtml(row.description) + '">' + escapeHtml(row.description) + '</span>' : '<span class="muted">—</span>';
+      if (key === 'relatedDocument') return row.relatedDocument ? '<button class="file-cell-button" type="button" title="' + escapeHtml(row.relatedDocument) + '" data-open-activity-document="' + escapeHtml(row.id) + '">' + iconSvg('file',14) + ' ดูไฟล์</button>' : '<button class="file-cell-button file-cell-upload" type="button" data-upload-activity-document="' + escapeHtml(row.id) + '">' + iconSvg('upload',14) + ' อัปโหลด</button>';
+      if (key === 'budgetSummary') {
+        const linked = data('budgets').filter(budget => budget.activityId === row.id);
+        if (!linked.length) return '<div class="activity-budget-cell"><span class="muted">ยังไม่มีงบประมาณ</span><button class="activity-budget-add" type="button" data-add-activity-budget="' + escapeHtml(row.id) + '">+ เพิ่มงบ</button></div>';
+        const income = linked.reduce((sum, budget) => sum + Number(budget.incomeTotal || 0), 0);
+        const expenses = linked.reduce((sum, budget) => sum + Number(budget.expenseTotal || 0), 0);
+        const net = income - expenses;
+        return '<div class="activity-budget-cell"><strong>รายรับ ฿' + money(income) + '</strong><small>รายจ่าย ฿' + money(expenses) + ' · <span class="' + (net < 0 ? 'budget-negative' : 'budget-positive') + '">สุทธิ ' + (net < 0 ? '−' : '') + '฿' + money(Math.abs(net)) + '</span></small><div class="activity-budget-actions"><button class="file-cell-button" type="button" data-view-budget="' + escapeHtml(linked[0].id) + '">ดูงบ ' + (linked.length > 1 ? '(' + linked.length + ')' : '') + '</button><button class="activity-budget-add" type="button" data-add-activity-budget="' + escapeHtml(row.id) + '">+ เพิ่ม</button></div></div>';
+      }
+    }
+    if (entity === 'budgets') {
+      if (key === 'incomeTotal' || key === 'expenseTotal') return budgetMoney(row[key]);
+      if (key === 'net') { const net = budgetNet(row); return `<span class="budget-net ${net < 0 ? 'budget-negative' : net > 0 ? 'budget-positive' : ''}">${net < 0 ? '−' : ''}${budgetMoney(Math.abs(net))}</span>`; }
+      if (key === 'status') { const outcome = budgetOutcome(row); const color = outcome === 'มีกำไร' ? 'green' : outcome === 'ขาดทุน' ? 'orange' : ''; return `<span class="tag ${color}">${outcome}</span>`; }
+      if (key === 'approvalDocument' || key === 'receiptDocument') { return row[key] ? `<button class="file-cell-button" type="button" title="${escapeHtml(row[key])}" data-open-budget-document="${escapeHtml(row.id)}" data-budget-document-type="${key}">${iconSvg('file', 14)} ดูไฟล์</button>` : `<button class="file-cell-button file-cell-upload" type="button" data-upload-budget-document="${escapeHtml(row.id)}" data-budget-document-type="${key}">${iconSvg('upload', 14)} อัปโหลด</button>`; }
     }
     if(entity==='jointCourses'){
       if(key==='projectCode')return `<span class="cell-primary">${escapeHtml(row.projectCode||'—')}</span>`;
@@ -787,8 +812,8 @@
   function openAttachmentDatabase(){
     if(!('indexedDB'in window))return Promise.reject(new Error('IndexedDB is unavailable'));
     return new Promise((resolve,reject)=>{
-      const request=indexedDB.open('one-journey-attachments',2);
-      request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains('agreements'))request.result.createObjectStore('agreements',{keyPath:'id'});if(!request.result.objectStoreNames.contains('intlRelations'))request.result.createObjectStore('intlRelations',{keyPath:'id'});};
+      const request=indexedDB.open('one-journey-attachments',3);
+      request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains('agreements'))request.result.createObjectStore('agreements',{keyPath:'id'});if(!request.result.objectStoreNames.contains('intlRelations'))request.result.createObjectStore('intlRelations',{keyPath:'id'}); if (!request.result.objectStoreNames.contains('budgetAttachments')) request.result.createObjectStore('budgetAttachments', { keyPath: 'id' }); if (!request.result.objectStoreNames.contains('activityAttachments')) request.result.createObjectStore('activityAttachments', { keyPath: 'id' });};
       request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error||new Error('Could not open attachment storage'));
     });
   }
@@ -812,6 +837,42 @@
     const result=await new Promise((resolve,reject)=>{const request=db.transaction('intlRelations','readonly').objectStore('intlRelations').get(recordId);request.onsuccess=()=>resolve(request.result||null);request.onerror=()=>reject(request.error||new Error('Could not read attachment'));});
     db.close();return result;
   }
+  async function saveBudgetAttachment(recordId, documentKey, file) {
+    const db = await openAttachmentDatabase();
+    const key = `${recordId}:${documentKey}`;
+    await new Promise((resolve, reject) => { const tx = db.transaction('budgetAttachments', 'readwrite'); tx.objectStore('budgetAttachments').put({ id: key, recordId, documentKey, name: file.name, type: file.type, blob: file, updatedAt: new Date().toISOString() }); tx.oncomplete = resolve; tx.onerror = () => reject(tx.error || new Error('Could not save budget attachment')); tx.onabort = () => reject(tx.error || new Error('Budget attachment save was aborted')); });
+    db.close();
+  }
+  async function readBudgetAttachment(recordId, documentKey) {
+    const db = await openAttachmentDatabase();
+    const key = `${recordId}:${documentKey}`;
+    const result = await new Promise((resolve, reject) => { const request = db.transaction('budgetAttachments', 'readonly').objectStore('budgetAttachments').get(key); request.onsuccess = () => resolve(request.result || null); request.onerror = () => reject(request.error || new Error('Could not read budget attachment')); });
+    db.close(); return result;
+  }
+  async function openBudgetAttachment(recordId, documentKey) {
+    const popup = window.open('about:blank', '_blank');
+    try { const stored = await readBudgetAttachment(recordId, documentKey); if (!stored?.blob) { popup?.close(); toast('ไม่พบไฟล์แนบในเบราว์เซอร์นี้'); return; } const url = URL.createObjectURL(stored.blob); if (popup) { popup.location.href = url; setTimeout(() => URL.revokeObjectURL(url), 60000); } else { const anchor = document.createElement('a'); anchor.href = url; anchor.download = stored.name; anchor.click(); setTimeout(() => URL.revokeObjectURL(url), 10000); } }
+    catch (error) { popup?.close(); console.warn('Could not open budget attachment', error); toast('เปิดไฟล์งบประมาณไม่ได้ กรุณาลองอีกครั้ง'); }
+  }
+
+  async function saveActivityAttachment(recordId, file) {
+    const db = await openAttachmentDatabase();
+    await new Promise((resolve, reject) => { const tx = db.transaction('activityAttachments', 'readwrite'); tx.objectStore('activityAttachments').put({ id: recordId, name: file.name, type: file.type, blob: file, updatedAt: new Date().toISOString() }); tx.oncomplete = resolve; tx.onerror = () => reject(tx.error || new Error('Could not save activity attachment')); tx.onabort = () => reject(tx.error || new Error('Activity attachment save was aborted')); });
+    db.close();
+  }
+  async function openActivityAttachment(recordId) {
+    const popup = window.open('about:blank', '_blank');
+    try {
+      const db = await openAttachmentDatabase();
+      const stored = await new Promise((resolve, reject) => { const request = db.transaction('activityAttachments', 'readonly').objectStore('activityAttachments').get(recordId); request.onsuccess = () => resolve(request.result || null); request.onerror = () => reject(request.error || new Error('Could not read activity attachment')); });
+      db.close();
+      if (!stored?.blob) { popup?.close(); toast('ไม่พบไฟล์แนบในเบราว์เซอร์นี้'); return; }
+      const url = URL.createObjectURL(stored.blob);
+      if (popup) { popup.location.href = url; setTimeout(() => URL.revokeObjectURL(url), 60000); }
+      else { const anchor = document.createElement('a'); anchor.href = url; anchor.download = stored.name; anchor.click(); setTimeout(() => URL.revokeObjectURL(url), 10000); }
+    } catch (error) { popup?.close(); console.warn('Could not open activity attachment', error); toast('เปิดเอกสารกิจกรรมไม่ได้ กรุณาลองอีกครั้ง'); }
+  }
+
   async function removeIntlRelationAttachment(recordId){
     try{const db=await openAttachmentDatabase();await new Promise((resolve,reject)=>{const tx=db.transaction('intlRelations','readwrite');tx.objectStore('intlRelations').delete(recordId);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});db.close();}catch(error){console.warn('Could not remove university attachment',error);}
   }
@@ -1060,7 +1121,7 @@
     if(entity==='agreements'){
       $('#modalFields').innerHTML=renderAgreementFields(existing,defaults);
       setupAgreementUpload();
-      $('#recordModal').showModal();
+$('#recordModal').showModal();
       return;
     }
     let currentSection='';
@@ -1087,8 +1148,18 @@
         input=`<input class="form-control" name="${field.key}" type="text" list="partnerNameOptions" value="${escapeHtml(value)}" ${required} placeholder="${escapeHtml(field.placeholder||field.label)}" autocomplete="off"><datalist id="partnerNameOptions">${names.map(name=>`<option value="${escapeHtml(name)}"></option>`).join('')}</datalist>`;
       }else if(field.type==='textarea'){
         input=`<textarea class="form-control textarea" name="${field.key}" ${required} placeholder="${escapeHtml(field.label)}">${escapeHtml(value)}</textarea>`;
-      }else if(field.type==='file'){
-        input=`<label class="agreement-upload-dropzone intl-upload-dropzone" for="intlRelationAttachment"><input id="intlRelationAttachment" name="${field.key}" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xlsx,.pptx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.presentationml.presentation"><span class="agreement-upload-icon">${iconSvg('upload',20)}</span><strong>คลิกหรือลากไฟล์มาวางที่นี่</strong><small>PDF, Word, Excel, PowerPoint, JPG หรือ PNG · ไม่เกิน 20 MB</small><span id="intlRelationAttachmentName" class="agreement-file-name">${escapeHtml(existing?.attachmentName||'ยังไม่ได้เลือกไฟล์')}</span></label>`;
+      }else if (field.type === 'file') {
+        if (entity === 'budgets') {
+          const inputId = `budget-${field.key}`;
+          const documentName = existing?.[field.key] || 'ยังไม่ได้เลือกไฟล์';
+          input = `<label class="agreement-upload-dropzone intl-upload-dropzone" for="${inputId}"><input id="${inputId}" name="${field.key}" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png" data-budget-document-input="${field.key}"><span class="agreement-upload-icon">${iconSvg('upload', 20)}</span><strong>คลิกหรือลากไฟล์มาวางที่นี่</strong><small>PDF, Word, JPG หรือ PNG · ไม่เกิน 20 MB</small><span data-budget-document-name="${field.key}" class="agreement-file-name">${escapeHtml(documentName)}</span></label>`;
+        } else if (entity === 'activities') {
+          const inputId = `activity-${field.key}`;
+          const documentName = existing?.[field.key] || 'ยังไม่ได้เลือกไฟล์';
+          input = `<label class="agreement-upload-dropzone intl-upload-dropzone" for="${inputId}"><input id="${inputId}" name="${field.key}" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png" data-activity-document-input><span class="agreement-upload-icon">${iconSvg('upload', 20)}</span><strong>คลิกหรือลากไฟล์มาวางที่นี่</strong><small>PDF, Word, JPG หรือ PNG · ไม่เกิน 20 MB</small><span data-activity-document-name class="agreement-file-name">${escapeHtml(documentName)}</span></label>`;
+        } else {
+          input = `<label class="agreement-upload-dropzone intl-upload-dropzone" for="intlRelationAttachment"><input id="intlRelationAttachment" name="${field.key}" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xlsx,.pptx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.presentationml.presentation"><span class="agreement-upload-icon">${iconSvg('upload', 20)}</span><strong>คลิกหรือลากไฟล์มาวางที่นี่</strong><small>PDF, Word, Excel, PowerPoint, JPG หรือ PNG · ไม่เกิน 20 MB</small><span id="intlRelationAttachmentName" class="agreement-file-name">${escapeHtml(existing?.attachmentName || 'ยังไม่ได้เลือกไฟล์')}</span></label>`;
+        }
       }else{
         input=`<input class="form-control" name="${field.key}" type="${field.type}" value="${escapeHtml(value)}" ${required} ${field.type==='number'?`min="0" step="${field.step||'0.01'}"`:''} ${field.autoCode?'readonly':''} placeholder="${escapeHtml(field.placeholder||field.label)}">`;
       }
@@ -1133,9 +1204,14 @@
       $$('[data-intl-save-action]').forEach(button=>button.addEventListener('click',()=>{const form=$('#recordForm');form.dataset.openIntlAction=button.dataset.intlSaveAction;saveRecord(form);}));
       setupInternationalUpload();
     }
+    if (entity === 'budgets' || entity === 'activities') setupBudgetUploads();
     $('#recordModal').showModal();
   }
-  async function saveRecord(form){
+  function setupBudgetUploads() {
+    $$('[data-budget-document-input]').forEach(input => input.addEventListener('change', () => { const name = $(`[data-budget-document-name="${input.dataset.budgetDocumentInput}"]`); if (name && input.files?.[0]) name.textContent = input.files[0].name; }));
+    $$('[data-activity-document-input]').forEach(input => input.addEventListener('change', () => { const name = $('[data-activity-document-name]'); if (name && input.files?.[0]) name.textContent = input.files[0].name; }));
+  }
+async function saveRecord(form){
     if(form.dataset.entity==='agreements')return saveAgreementRecord(form);
     const openRelatedBudget=form.dataset.openBudgetAfterSave==='true';delete form.dataset.openBudgetAfterSave;
     const openMemberA0=form.dataset.openMemberA0==='true';
@@ -1158,6 +1234,7 @@
     }
     if(entity==='customerGroups'&&rows.some(row=>row.id!==recordId&&String(row.groupCode||'').trim().toLocaleUpperCase('en')===String(body.groupCode||'').trim().toLocaleUpperCase('en')&&String(row.classCode||'').trim().toLocaleUpperCase('en')===String(body.classCode||'').trim().toLocaleUpperCase('en'))){toast('กลุ่มลูกค้านี้มี Class นี้อยู่แล้ว');return;}
     if(entity==='budgets'&&rows.some(row=>row.id!==recordId&&String(row.code||'').toLocaleUpperCase('en')===String(body.code||'').toLocaleUpperCase('en'))){toast('รหัสงบนี้มีอยู่แล้ว');return;}
+    if(entity==='budgets'&&body.activityId&&!allActivities().some(activity=>activity.id===body.activityId)){toast('กิจกรรมที่เลือกไม่มีอยู่แล้ว กรุณาเลือกกิจกรรมใหม่');return;}
     if(entity==='alumni'&&rows.some(row=>row.id!==recordId&&String(row.alumniCode||'').trim().toLocaleUpperCase('en')===String(body.alumniCode||'').trim().toLocaleUpperCase('en'))){toast('รหัส Alumni นี้มีอยู่แล้ว');return;}
     if(entity==='studentHistories'){
       if(rows.some(row=>row.id!==recordId&&String(row.studentCode||row.studentId||'').trim().toLocaleUpperCase('en')===String(body.studentCode||'').trim().toLocaleUpperCase('en'))){toast('รหัสนักเรียนนี้มีอยู่แล้ว');return;}
@@ -1181,6 +1258,14 @@
       if(rows.some(row=>row.id!==recordId&&String(row.schoolCode||'').trim().toLocaleUpperCase('en')===String(body.schoolCode||'').trim().toLocaleUpperCase('en'))){toast('รหัส Partner โรงเรียนนี้มีอยู่แล้ว');return;}
       if((body.relatedActivityIds||[]).some(id=>!allActivities().some(activity=>activity.id===id))||(body.relatedProductIds||[]).some(id=>!data('products').some(product=>product.id===id))){toast('มีกิจกรรมหรือหลักสูตรที่ถูกลบไปแล้ว กรุณาเลือกข้อมูลต้นทางใหม่');return;}
     }
+    const recordFiles = [];
+    const documentKeys = entity === 'budgets' ? ['approvalDocument', 'receiptDocument'] : entity === 'activities' ? ['relatedDocument'] : [];
+    for (const key of documentKeys) {
+      const file = form.elements.namedItem(key)?.files?.[0]; if (!file) continue;
+      const extension = file.name.split('.').pop().toLocaleLowerCase('en'); if (!['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'].includes(extension)) { toast('ชนิดไฟล์ไม่รองรับ กรุณาเลือก PDF, Word, JPG หรือ PNG'); return; }
+      if (file.size > 20 * 1024 * 1024) { toast('ไฟล์มีขนาดเกิน 20 MB'); return; }
+      recordFiles.push({ key, file });
+    }
     let intlFile=null;
     if(entity==='intlRelations'){
       if(rows.some(row=>row.id!==recordId&&String(row.partnerCode||'').trim().toLocaleUpperCase('en')===String(body.partnerCode||'').trim().toLocaleUpperCase('en'))){toast('รหัส Partner มหาวิทยาลัยนี้มีอยู่แล้ว');return;}
@@ -1191,6 +1276,13 @@
     }
     delete form.dataset.openMemberA0;
     const savedId=recordId||id(entity==='a0Participants'?'A0':entity==='activities'?'EVT':entity==='jointCourses'?'JNT':entity==='intlRelations'?'INT':entity.slice(0,3).toUpperCase());
+    for (const { key, file } of recordFiles) {
+      try {
+        if (entity === 'budgets') await saveBudgetAttachment(savedId, key, file);
+        else await saveActivityAttachment(savedId, file);
+        body[key] = file.name; body[`${key}Type`] = file.type; body[`${key}Size`] = file.size;
+      } catch (error) { console.warn('Could not save record attachment', error); toast(entity === 'budgets' ? 'บันทึกเอกสารงบประมาณไม่สำเร็จ กรุณาลองอีกครั้ง' : 'บันทึกเอกสารกิจกรรมไม่สำเร็จ กรุณาลองอีกครั้ง'); return; }
+    }
     if(entity==='intlRelations'&&intlFile){try{await saveIntlRelationAttachment(savedId,intlFile);body.attachmentName=intlFile.name;body.attachmentType=intlFile.type;body.attachmentSize=intlFile.size;}catch(error){console.warn('Could not save university attachment',error);toast('บันทึกเอกสารประกอบไม่สำเร็จ กรุณาลองอีกครั้ง');return;}}
     let savedRecord;
     if(recordId){const index=rows.findIndex(row=>row.id===recordId);if(index>=0){rows[index]={...rows[index],...body};savedRecord=rows[index];}}
@@ -1250,6 +1342,7 @@
     if(entity==='jointCourses'&&data('budgets').some(row=>row.relatedGroup==='A2'&&row.relatedRecordId===recordId)){toast('โครงการนี้มีงบการเงินเชื่อมอยู่ กรุณาลบงบการเงินก่อนลบโครงการ');return;}
     if(entity==='potentialPartners'&&(data('budgets').some(row=>row.relatedGroup==='B0'&&row.relatedRecordId===recordId)||data('agreements').some(row=>row.relatedGroup==='B0'&&row.relatedRecordId===recordId))){toast('Partner นี้มีงบการเงินหรือ MOU/MOA เชื่อมอยู่ กรุณาจัดการรายการที่เชื่อมโยงก่อนลบ');return;}
     if(entity==='schools'&&(data('budgets').some(row=>row.relatedGroup==='B1'&&row.relatedRecordId===recordId)||data('agreements').some(row=>row.relatedGroup==='B1'&&row.relatedRecordId===recordId))){toast('โรงเรียนนี้มีงบการเงินหรือ MOU/MOA เชื่อมอยู่ กรุณาจัดการรายการที่เชื่อมโยงก่อนลบ');return;}
+    if(entity==='activities'&&data('budgets').some(row=>row.activityId===recordId)){toast('กิจกรรมนี้มีงบประมาณเชื่อมอยู่ กรุณาจัดการงบประมาณก่อนลบกิจกรรม');return;}
     if(entity==='activities'&&data('schools').some(row=>(row.relatedActivityIds||[]).includes(recordId))){toast('กิจกรรมนี้เชื่อมกับโรงเรียนคู่ความร่วมมืออยู่ กรุณาเอาความเชื่อมโยงออกก่อนลบ');return;}
     if(entity==='products'&&data('schools').some(row=>(row.relatedProductIds||[]).includes(recordId))){toast('หลักสูตรนี้เชื่อมกับโรงเรียนคู่ความร่วมมืออยู่ กรุณาเอาความเชื่อมโยงออกก่อนลบ');return;}
     if(entity==='intlRelations'&&(data('budgets').some(row=>row.relatedGroup==='B2'&&row.relatedRecordId===recordId)||data('agreements').some(row=>row.relatedGroup==='B2'&&row.relatedRecordId===recordId))){toast('มหาวิทยาลัยนี้มีงบการเงินหรือ MOU/MOA เชื่อมอยู่ กรุณาจัดการรายการที่เชื่อมโยงก่อนลบ');return;}
@@ -1275,7 +1368,7 @@
       ...rows.map((row,index)=>keys.map(key=>{
         const alumniName=[row.prefix,row.firstName,row.lastName].filter(Boolean).join(' ');
         const studentName=[row.prefix,row.firstName,row.lastName].filter(Boolean).join(' ');
-        const value=entity==='studentHistories'&&key==='sequence'?index+1:entity==='studentHistories'&&key==='fullName'?studentName:entity==='alumni'&&key==='sequence'?index+1:entity==='alumni'&&key==='fullName'?alumniName:entity==='budgets'&&key==='net'?budgetNet(row):entity==='budgets'&&key==='status'?budgetOutcome(row):entity==='agreements'&&key==='cooperationStatus'?agreementCooperationStatus(row):entity==='agreements'&&key==='attachment'?row.attachmentName||'':entity==='agreements'&&key==='sequence'?index+1:entity==='activities'&&key==='participants'?registrationsFor(row.id).length:entity==='activities'&&key==='attended'?registrationsFor(row.id).filter(reg=>reg.checkInAt).length:entity==='a0Participants'&&key==='memberId'?memberById(row.memberId)?.name||row.memberId:entity==='a0Participants'&&key==='activityId'?allActivities().find(activity=>activity.id===row.activityId)?.name||row.activityId:entity==='schools'&&key==='status'?schoolStatus(row):entity==='schools'&&key==='agreementType'?schoolAgreementType(row):entity==='schools'&&key==='incomeTotal'?schoolIncome(row):entity==='intlRelations'&&key==='agreementType'?intlAgreementType(row):entity==='intlRelations'&&key==='status'?intlRelationStatus(row):entity==='intlRelations'&&key==='studentFlow'?`${row.inboundStudents||0} / ${row.outboundStudents||0}`:entity==='intlRelations'&&key==='activityCount'?intlActivityCount(row):entity==='intlRelations'&&key==='incomeTotal'?intlRelationIncome(row):entity==='intlRelations'&&key==='relatedActivityIds'?(row.relatedActivityIds||[]).map(activityId=>allActivities().find(activity=>activity.id===activityId)?.name||activityId).join(' / '):(row[key]??'');
+        const value=entity==='studentHistories'&&key==='sequence'?index+1:entity==='studentHistories'&&key==='fullName'?studentName:entity==='alumni'&&key==='sequence'?index+1:entity==='alumni'&&key==='fullName'?alumniName:entity==='budgets'&&key==='net'?budgetNet(row):entity==='budgets'&&key==='status'?budgetOutcome(row):entity==='agreements'&&key==='cooperationStatus'?agreementCooperationStatus(row):entity==='agreements'&&key==='attachment'?row.attachmentName||'':entity==='agreements'&&key==='sequence'?index+1:entity==='activities'&&key==='participants'?registrationsFor(row.id).length:entity==='activities'&&key==='attended'?registrationsFor(row.id).filter(reg=>reg.checkInAt).length:entity==='a0Participants'&&key==='memberId'?memberById(row.memberId)?.name||row.memberId:entity==='a0Participants'&&key==='activityId'?allActivities().find(activity=>activity.id===row.activityId)?.name||row.activityId:entity==='schools'&&key==='status'?schoolStatus(row):entity==='schools'&&key==='agreementType'?schoolAgreementType(row):entity==='schools'&&key==='incomeTotal'?schoolIncome(row):entity==='intlRelations'&&key==='agreementType'?intlAgreementType(row):entity==='intlRelations'&&key==='status'?intlRelationStatus(row):entity==='intlRelations'&&key==='studentFlow'?`${row.inboundStudents||0} / ${row.outboundStudents||0}`:entity==='intlRelations'&&key==='activityCount'?intlActivityCount(row):entity==='intlRelations'&&key==='incomeTotal'?intlRelationIncome(row):entity==='intlRelations'&&key==='relatedActivityIds'?(row.relatedActivityIds||[]).map(activityId=>allActivities().find(activity=>activity.id===activityId)?.name||activityId).join(' / '):entity==='activities'&&key==='budgetSummary'?data('budgets').filter(budget=>budget.activityId===row.id).map(budget=>`${budget.projectName||budget.code}: รายรับ ${budget.incomeTotal||0}, รายจ่าย ${budget.expenseTotal||0}, สุทธิ ${budgetNet(budget)}`).join(' | '):(row[key]??'');
         return quoteCsv(value);
       }).join(','))
     ].join('\r\n');
@@ -1299,6 +1392,15 @@
     $$('[data-open-product]',root).forEach(button=>button.addEventListener('click',()=>openProductView(button.dataset.openProduct)));
     $$('[data-budget-a2]',root).forEach(button=>button.addEventListener('click',()=>{const record=data('jointCourses').find(row=>row.id===button.dataset.budgetA2);if(record)openBudgetForA2(record);}));
     $$('[data-view-agreement]',root).forEach(button=>button.addEventListener('click',()=>openAgreementView(button.dataset.viewAgreement)));
+    $$('[data-open-budget-document]', root).forEach(button => button.addEventListener('click', () => openBudgetAttachment(button.dataset.openBudgetDocument, button.dataset.budgetDocumentType)));
+    $$('[data-upload-budget-document]', root).forEach(button => button.addEventListener('click', () => { const documentType = button.dataset.budgetDocumentType; openForm('budgets', button.dataset.uploadBudgetDocument); requestAnimationFrame(() => $(`[data-budget-document-input="${documentType}"]`)?.closest('.form-field')?.scrollIntoView({ block: 'center', behavior: 'smooth' })); }));
+    $$('[data-open-activity-document]', root).forEach(button => button.addEventListener('click', () => openActivityAttachment(button.dataset.openActivityDocument)));
+    $$('[data-upload-activity-document]', root).forEach(button => button.addEventListener('click', () => { openForm('activities', button.dataset.uploadActivityDocument); requestAnimationFrame(() => $('[data-activity-document-input]')?.closest('.form-field')?.scrollIntoView({ block: 'center', behavior: 'smooth' })); }));
+    $$('[data-add-activity-budget]', root).forEach(button => button.addEventListener('click', () => {
+      const activity = allActivities().find(row => row.id === button.dataset.addActivityBudget); if (!activity) return;
+      const type = ['Workshop', 'Camp', 'Short Course'].includes(activity.activityType) ? activity.activityType : 'กิจกรรมประชาสัมพันธ์';
+      openForm('budgets', '', { activityId: activity.id, projectName: activity.name, type, owner: activity.owner || '' });
+    }));
     $$('[data-open-agreement-file]',root).forEach(button=>button.addEventListener('click',()=>openAgreementFile(button.dataset.openAgreementFile)));
     $$('[data-upload-agreement-file]',root).forEach(button=>button.addEventListener('click',()=>openForm('agreements',button.dataset.uploadAgreementFile)));
     $$('[data-edit]',root).forEach(button=>button.addEventListener('click',()=>openForm(currentRoute,button.dataset.edit)));
