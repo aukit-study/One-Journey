@@ -89,10 +89,10 @@ function LoginScreen({ onLogin }) {
               <path d="M465 27h32l-13 10 13 10h-32V27Z" fill="#FF7A32" />
               <path d="M122 77c10-23 40-25 54-8 10-20 43-18 50 7 20 1 29 13 29 25H110c1-11 4-19 12-24Z" fill="#FFF9ED" opacity=".78" />
               <path d="M300 52c7-16 29-17 39-5 7-15 31-14 36 5 16 1 22 10 22 19h-107c1-8 4-15 10-19Z" fill="#FFF9ED" opacity=".7" />
-              <g fill="#8F4A26" opacity=".7"><circle cx="553" cy="143" r="16"/><path d="M549 155h8v77h-8z"/><circle cx="350" cy="160" r="14"/><path d="M346 171h8v60h-8z"/></g>
-              <g fill="#F8D39E"><circle cx="329" cy="178" r="18"/><path d="M310 195h38v47h-38z" fill="#294D69"/><path d="m313 202-17 20 6 5 20-15m24-10 17 16-6 6-18-14"/><path d="m316 238-10 19h11l12-17m11-2 10 19h11l-14-21" fill="#294D69"/></g>
-              <g fill="#162F46"><circle cx="233" cy="190" r="14"/><path d="M218 204h31v39h-31z" fill="#F26A2B"/><path d="m221 210-19 19 5 6 21-15m21-10 17 18-6 6-19-15" fill="#FFD7A2"/><path d="m221 241-8 18h11l10-17m8-1 9 18h11l-13-19"/><path d="M223 178c2-12 19-15 25-4v15h-26v-11Z" fill="#38251B"/></g>
-              <g fill="#FFF1D9" opacity=".9"><circle cx="90" cy="198" r="8"/><path d="M81 207h18v39H81z"/><path d="m83 214-13 18 5 4 13-15m11-7 13 16-5 5-14-16"/><path d="m84 244-8 17h10l7-16m7-1 9 17h10l-13-18"/></g>
+              <g fill="#8F4A26" opacity=".7"><circle cx="553" cy="143" r="16" /><path d="M549 155h8v77h-8z" /><circle cx="350" cy="160" r="14" /><path d="M346 171h8v60h-8z" /></g>
+              <g fill="#F8D39E"><circle cx="329" cy="178" r="18" /><path d="M310 195h38v47h-38z" fill="#294D69" /><path d="m313 202-17 20 6 5 20-15m24-10 17 16-6 6-18-14" /><path d="m316 238-10 19h11l12-17m11-2 10 19h11l-14-21" fill="#294D69" /></g>
+              <g fill="#162F46"><circle cx="233" cy="190" r="14" /><path d="M218 204h31v39h-31z" fill="#F26A2B" /><path d="m221 210-19 19 5 6 21-15m21-10 17 18-6 6-19-15" fill="#FFD7A2" /><path d="m221 241-8 18h11l10-17m8-1 9 18h11l-13-19" /><path d="M223 178c2-12 19-15 25-4v15h-26v-11Z" fill="#38251B" /></g>
+              <g fill="#FFF1D9" opacity=".9"><circle cx="90" cy="198" r="8" /><path d="M81 207h18v39H81z" /><path d="m83 214-13 18 5 4 13-15m11-7 13 16-5 5-14-16" /><path d="m84 244-8 17h10l7-16m7-1 9 17h10l-13-18" /></g>
             </svg>
           </div>
           <div className="auth-story-footer"><span><Icon name="shield" size={16} /> พื้นที่ทำงานของวิทยาลัย CAMT</span><span>มหาวิทยาลัยเชียงใหม่</span></div>
@@ -156,10 +156,6 @@ function Sidebar({ account, onLogout }) {
       <div className="sidebar-caption">ระบบงานการศึกษา</div>
       <nav className="nav" id="nav" aria-label="เมนูหลัก" />
       <div className="sidebar-bottom">
-        <div className="system-note">
-          <span className="status-dot" />
-          <span><strong>โหมดข้อมูลตัวอย่าง</strong><small>จัดเก็บในเบราว์เซอร์เครื่องนี้</small></span>
-        </div>
         <button className="profile-button transition-colors duration-150" id="profileButton" type="button" onClick={onLogout} title="ออกจากระบบ">
           <span className="avatar">AD</span>
           <span className="profile-copy"><strong>{account.displayName}</strong><small>ออกจากระบบ</small></span>
@@ -170,9 +166,7 @@ function Sidebar({ account, onLogout }) {
   );
 }
 
-function Topbar({ account, onLogout }) {
-  const [menuOpen, setMenuOpen] = useState(false);
-
+function Topbar() {
   return (
     <header className="topbar">
       <div className="breadcrumb">
@@ -186,14 +180,6 @@ function Topbar({ account, onLogout }) {
       </form>
       <div className="top-actions">
         <button className="icon-button notification-button" id="notificationButton" type="button" aria-label="การแจ้งเตือน"><Icon name="bell" /></button>
-        <div className="account-menu-wrap">
-          <button className="top-user" id="topUser" type="button" onClick={() => setMenuOpen(open => !open)} aria-expanded={menuOpen}>
-            <span className="avatar small">AD</span>
-            <span><strong>{account.displayName}</strong><small>วิทยาลัย CAMT</small></span>
-            <b><Icon name="chevronDown" size={15} /></b>
-          </button>
-          {menuOpen && <div className="account-menu"><span className="account-menu-label">ลงชื่อเข้าใช้ด้วย</span><strong>{account.email}</strong><button type="button" onClick={onLogout}><Icon name="logout" size={15} /> ออกจากระบบ</button></div>}
-        </div>
       </div>
     </header>
   );
@@ -237,7 +223,7 @@ export default function App() {
     <div className="app-shell min-h-screen bg-journey-canvas text-journey-ink">
       <Sidebar account={account} onLogout={handleLogout} />
       <main className="main-area min-h-screen">
-        <Topbar account={account} onLogout={handleLogout} />
+        <Topbar />
         <section className="content" id="content" aria-live="polite" />
       </main>
       <div className="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true" />
