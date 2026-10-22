@@ -421,11 +421,11 @@
     ['alumni','C · ศิษย์เก่า','graduation'],
     ['studentHistories','D · ประวัตินักเรียน','route']
   ];
-  const customerClassGroups=[
-    {type:'category',label:'A',children:customerClassLinks.slice(0,3).map(([route,label,icon])=>({type:'link',route,label,icon,compact:true}))},
-    {type:'category',label:'B',children:customerClassLinks.slice(3,6).map(([route,label,icon])=>({type:'link',route,label,icon,compact:true}))},
-    {type:'category',label:'C',children:customerClassLinks.slice(6,7).map(([route,label,icon])=>({type:'link',route,label,icon,compact:true}))},
-    {type:'category',label:'D',children:customerClassLinks.slice(7).map(([route,label,icon])=>({type:'link',route,label,icon,compact:true}))}
+  const customerGroupRoutes=new Set(['a0Participants','applicants','jointCourses','potentialPartners','schools','intlRelations','alumni']);
+  const customerGroups=[
+    {type:'link',route:'a0Participants',label:'A',icon:'users',compact:true},
+    {type:'link',route:'potentialPartners',label:'B',icon:'network',compact:true},
+    {type:'link',route:'alumni',label:'C',icon:'graduation',compact:true}
   ];
   const educationRoutes=new Set(['members','customerGroups','activities','budgets','agreements','products',...customerClassLinks.map(([route])=>route)]);
   const navActiveRoute=()=>currentRoute.startsWith('activity:')?'activities':currentRoute.startsWith('student:')?'studentHistories':currentRoute;
@@ -434,7 +434,8 @@
     {type:'disclosure',id:'education',label:'ระบบงานการศึกษา',icon:'book',children:[
       {type:'link',route:'members',label:'ข้อมูลเบื้องต้นลูกค้า',icon:'user'},
       {type:'link',route:'customerGroups',label:'จัดการกลุ่มลูกค้า',icon:'users'},
-      ...customerClassGroups,
+      {type:'subdisclosure',id:'customer-classes',label:'กลุ่มลูกค้า',icon:'users',children:customerGroups},
+      {type:'link',route:'studentHistories',label:'D · ประวัตินักเรียน',icon:'route'},
       {type:'link',route:'activities',label:'กิจกรรม',icon:'calendar'},
       {type:'link',route:'budgets',label:'งบประมาณรายได้',icon:'wallet'},
       {type:'link',route:'agreements',label:'MOU / MOA',icon:'handshake'},
@@ -455,10 +456,11 @@
   function navItemMarkup(item){
     if(item.type==='link')return `<a href="#${item.route}" class="nav-link${item.compact?' nav-link-compact':''}" data-route="${item.route}"><span class="nav-icon">${iconSvg(item.icon,18)}</span><span>${escapeHtml(item.label)}</span></a>`;
     const children=item.children.map(navItemMarkup).join('');
-    if(item.type==='category')return `<div class="nav-category"><div class="nav-category-label">${escapeHtml(item.label)}</div><div class="nav-category-links">${children}</div></div>`;
+    const isPrimary=item.type==='disclosure';
     const menuId=`nav-${item.id}`;
-    const active=educationRoutes.has(navActiveRoute());
-    return `<div class="nav-disclosure nav-disclosure-primary"><button class="nav-disclosure-toggle nav-primary-toggle${active?' route-active':''}" type="button" data-nav-toggle="${item.id}" aria-expanded="true" aria-controls="${menuId}"><span class="nav-icon">${iconSvg(item.icon,19)}</span><span>${escapeHtml(item.label)}</span><span class="nav-chevron">${iconSvg('chevronDown',16)}</span></button><div class="nav-disclosure-content" id="${menuId}">${children}</div></div>`;
+    const active=(isPrimary?educationRoutes:customerGroupRoutes).has(navActiveRoute());
+    const expanded=isPrimary||active;
+    return `<div class="nav-disclosure${isPrimary?' nav-disclosure-primary':' nav-disclosure-nested'}"><button class="nav-disclosure-toggle${isPrimary?' nav-primary-toggle':' nav-nested-toggle'}${active?' route-active':''}" type="button" data-nav-toggle="${item.id}" aria-expanded="${expanded}" aria-controls="${menuId}"><span class="nav-icon">${iconSvg(item.icon,19)}</span><span>${escapeHtml(item.label)}</span><span class="nav-chevron">${iconSvg('chevronDown',16)}</span></button><div class="nav-disclosure-content${isPrimary?'':' nav-nested-content'}" id="${menuId}"${expanded?'':' hidden'}>${children}</div></div>`;
   }
   function renderNav(){
     $('#nav').innerHTML=navSections.map(navItemMarkup).join('');
@@ -509,6 +511,8 @@
     const activeEducation=educationRoutes.has(activeRoute);
     const educationToggle=$('#nav [data-nav-toggle="education"]');
     educationToggle?.classList.toggle('route-active',activeEducation);
+    const customerGroupToggle=$('#nav [data-nav-toggle="customer-classes"]');
+    customerGroupToggle?.classList.toggle('route-active',customerGroupRoutes.has(activeRoute));
     $('#breadcrumbTitle').textContent=currentRoute==='overview'?'หน้าหลัก':currentRoute==='search'?'ผลการค้นหา':currentRoute.startsWith('activity:')?'ลงทะเบียน / เช็คอิน':currentRoute.startsWith('student:')?'เส้นทางนักเรียน':(schemas[currentRoute]?.title||'หน้าหลัก');
   }
 
