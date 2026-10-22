@@ -19,6 +19,7 @@
     graduation:'<path d="m2 10 10-5 10 5-10 5-10-5Z"/><path d="M6 12v5c3.5 3 8.5 3 12 0v-5M22 10v6"/>',
     route:'<circle cx="6" cy="19" r="2"/><path d="M8 19h5a5 5 0 0 0 0-10h-2a5 5 0 0 1 0-10" transform="translate(0 3)"/><path d="m15 5 3-3 3 3"/>',
     arrowUpRight:'<path d="M7 17 17 7M8 7h9v9"/>',
+    chevronDown:'<path d="m6 9 6 6 6-6"/>',
     download:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>',
     plus:'<path d="M12 5v14M5 12h14"/>',
     edit:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4 11.5-11.5Z"/>',
@@ -410,13 +411,29 @@
   const nextIntlRelationCode = () => {const year=String(new Date().getFullYear());const prefix=`UB2-${year}-`;const largest=data('intlRelations').reduce((max,row)=>{const code=String(row.partnerCode||'');return code.startsWith(prefix)?Math.max(max,Number(code.slice(prefix.length))||0):max;},0);return `${prefix}${String(largest+1).padStart(4,'0')}`;};
   function toast(message){const node=document.createElement('div');node.className='toast';node.textContent=message;$('#toastRegion').append(node);setTimeout(()=>node.remove(),3000);}
 
+  const customerClassLinks=[
+    ['a0Participants','A0 · ผู้เข้าร่วมค่าย / Workshop / Open House','users'],
+    ['applicants','A1 · ผู้สมัครหลักสูตร','user'],
+    ['jointCourses','A2 · หลักสูตรร่วม / Inter / Short Course','book'],
+    ['potentialPartners','B0 · Potential Partner','network'],
+    ['schools','B1 · โรงเรียนคู่ความร่วมมือ','school'],
+    ['intlRelations','B2 · มหาวิทยาลัย / วิเทศสัมพันธ์','globe'],
+    ['alumni','C · ศิษย์เก่า','graduation'],
+    ['studentHistories','D · ประวัตินักเรียน','route']
+  ];
+  const educationRoutes=new Set(['members','customerGroups','activities','budgets','agreements','products',...customerClassLinks.map(([route])=>route)]);
+  const navActiveRoute=()=>currentRoute.startsWith('activity:')?'activities':currentRoute.startsWith('student:')?'studentHistories':currentRoute;
   const navSections=[
-    {label:'ภาพรวม',items:[['overview','หน้าหลัก','home']]},
-    {label:'งบประมาณและความร่วมมือ',items:[['budgets','งบประมาณรายได้','wallet'],['agreements','MOU / MOA','handshake']]},
-    {label:'กลุ่มลูกค้า A',items:[['members','ข้อมูลเบื้องต้นลูกค้า','users'],['a0Participants','A0 · ผู้เข้าร่วมกิจกรรม','users'],['activities','กิจกรรม','calendar'],['applicants','A1 · ผู้สมัครหลักสูตร','user'],['jointCourses','A2 · Joint / Inter / Short Course','book'],['products','ทะเบียนโปรดัก / หลักสูตร','package']]},
-    {label:'เครือข่ายกลุ่ม B',items:[['potentialPartners','B0 · Potential Partner','network'],['schools','B1 · โรงเรียนคู่ความร่วมมือ','school'],['intlRelations','B2 · มหาวิทยาลัย / วิเทศสัมพันธ์','globe']]},
-    {label:'บุคคลและเส้นทางการศึกษา',items:[['alumni','C · ศิษย์เก่า','graduation'],['studentHistories','D · ประวัตินักเรียน','route']]},
-    {label:'ตั้งค่าระบบ',items:[['customerGroups','จัดการกลุ่มลูกค้า','users']]}
+    {type:'link',route:'overview',label:'หน้าหลัก',icon:'home'},
+    {type:'disclosure',id:'education',label:'ระบบงานการศึกษา',icon:'book',children:[
+      {type:'link',route:'members',label:'ข้อมูลเบื้องต้นลูกค้า',icon:'user'},
+      {type:'link',route:'customerGroups',label:'จัดการกลุ่มลูกค้า',icon:'users'},
+      {type:'subdisclosure',id:'customer-classes',label:'กลุ่มลูกค้า',icon:'users',children:customerClassLinks.map(([route,label,icon])=>({type:'link',route,label,icon,compact:true}))},
+      {type:'link',route:'activities',label:'กิจกรรม',icon:'calendar'},
+      {type:'link',route:'budgets',label:'งบประมาณรายได้',icon:'wallet'},
+      {type:'link',route:'agreements',label:'MOU / MOA',icon:'handshake'},
+      {type:'link',route:'products',label:'ทะเบียนโปรดัก / หลักสูตร',icon:'package'}
+    ]}
   ];
   const groupTabs=[
     ['a0Participants','A0','ผู้เข้าร่วมกิจกรรม'],
@@ -429,9 +446,30 @@
     ['studentHistories','D','ประวัตินักเรียน']
   ];
   const groupTabRoutes=new Set([...groupTabs.map(([route])=>route),'activities']);
+  function navItemMarkup(item){
+    if(item.type==='link')return `<a href="#${item.route}" class="nav-link${item.compact?' nav-link-compact':''}" data-route="${item.route}"><span class="nav-icon">${iconSvg(item.icon,18)}</span><span>${escapeHtml(item.label)}</span></a>`;
+    const isPrimary=item.type==='disclosure';
+    const children=item.children.map(navItemMarkup).join('');
+    const menuId=`nav-${item.id}`;
+    const activeRoutes=isPrimary?educationRoutes:new Set(customerClassLinks.map(([route])=>route));
+    const active=activeRoutes.has(navActiveRoute());
+    return `<div class="nav-disclosure${isPrimary?' nav-disclosure-primary':' nav-disclosure-nested'}"><button class="nav-disclosure-toggle${isPrimary?' nav-primary-toggle':' nav-nested-toggle'}${active?' route-active':''}" type="button" data-nav-toggle="${item.id}" aria-expanded="true" aria-controls="${menuId}"><span class="nav-icon">${iconSvg(item.icon,19)}</span><span>${escapeHtml(item.label)}</span><span class="nav-chevron">${iconSvg('chevronDown',16)}</span></button><div class="nav-disclosure-content${isPrimary?'':' nav-nested-content'}" id="${menuId}">${children}</div></div>`;
+  }
   function renderNav(){
-    $('#nav').innerHTML=navSections.map(section=>`<div class="nav-group-label">${escapeHtml(section.label)}</div>${section.items.map(([key,label,icon])=>`<a href="#${key}" class="nav-link" data-route="${key}"><span class="nav-icon">${iconSvg(icon,17)}</span><span>${escapeHtml(label)}</span></a>`).join('')}`).join('');
-    $$('#nav [data-route]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();go(link.dataset.route);}));
+    $('#nav').innerHTML=navSections.map(navItemMarkup).join('');
+    $('#nav').addEventListener('click',event=>{
+      const toggle=event.target.closest('[data-nav-toggle]');
+      if(toggle){
+        const expanded=toggle.getAttribute('aria-expanded')==='true';
+        const content=$(`#${toggle.getAttribute('aria-controls')}`);
+        toggle.setAttribute('aria-expanded',String(!expanded));
+        toggle.classList.toggle('is-open',!expanded);
+        if(content)content.hidden=expanded;
+        return;
+      }
+      const link=event.target.closest('[data-route]');
+      if(link){event.preventDefault();go(link.dataset.route);}
+    });
   }
   function renderGroupTabs(){
     const selectedRoute=currentRoute.startsWith('activity:')?'a0Participants':currentRoute.startsWith('student:')?'studentHistories':currentRoute;
@@ -454,7 +492,20 @@
   function memberById(memberId){return data('members').find(member=>member.id===memberId);}
   function memberGroupCodes(member){return Array.isArray(member?.groups)?member.groups:(member?.group?[member.group]:[]);}
   function updateNavState(){
-    $$('#nav [data-route]').forEach(link=>link.classList.toggle('active',link.dataset.route===currentRoute || (currentRoute.startsWith('activity:')&&link.dataset.route==='activities') || (currentRoute.startsWith('student:')&&link.dataset.route==='studentHistories')));
+    const activeRoute=navActiveRoute();
+    let activeDisclosure=$(`#nav [data-route="${activeRoute}"]`)?.closest('.nav-disclosure');
+    while(activeDisclosure){
+      const content=activeDisclosure.querySelector(':scope > .nav-disclosure-content');
+      const toggle=activeDisclosure.querySelector(':scope > [data-nav-toggle]');
+      if(content?.hidden){content.hidden=false;toggle?.setAttribute('aria-expanded','true');toggle?.classList.remove('is-open');}
+      activeDisclosure=activeDisclosure.parentElement?.closest('.nav-disclosure')||null;
+    }
+    $$('#nav [data-route]').forEach(link=>link.classList.toggle('active',link.dataset.route===activeRoute));
+    const activeEducation=educationRoutes.has(activeRoute);
+    const educationToggle=$('#nav [data-nav-toggle="education"]');
+    const customerToggle=$('#nav [data-nav-toggle="customer-classes"]');
+    educationToggle?.classList.toggle('route-active',activeEducation);
+    customerToggle?.classList.toggle('route-active',groupTabRoutes.has(activeRoute));
     $('#breadcrumbTitle').textContent=currentRoute==='overview'?'หน้าหลัก':currentRoute==='search'?'ผลการค้นหา':currentRoute.startsWith('activity:')?'ลงทะเบียน / เช็คอิน':currentRoute.startsWith('student:')?'เส้นทางนักเรียน':(schemas[currentRoute]?.title||'หน้าหลัก');
   }
 

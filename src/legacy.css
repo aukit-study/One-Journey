@@ -1697,6 +1697,143 @@ textarea:focus-visible {
     background: var(--orange)
 }
 
+/* Sidebar hierarchy: keep Home separate and group education tools in disclosures. */
+.sidebar-caption {
+    display: none
+}
+
+.nav {
+    gap: 5px;
+    padding: 0 1px
+}
+
+.nav-link,
+.nav-disclosure-toggle {
+    min-width: 0;
+    min-height: 46px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 9px 12px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: #655e57;
+    text-align: left;
+    font: inherit;
+    font-size: 16px;
+    line-height: 1.35;
+    transition: background .15s, color .15s;
+    cursor: pointer
+}
+
+.nav-link:hover,
+.nav-disclosure-toggle:hover {
+    background: #fff0e5;
+    color: #e96524
+}
+
+.nav-link.active {
+    background: #ffecdd;
+    color: #e96524;
+    font-weight: 650
+}
+
+.nav-icon {
+    width: 21px;
+    height: 21px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 21px;
+    color: currentColor
+}
+
+.nav-link > span:not(.nav-icon),
+.nav-disclosure-toggle > span:not(.nav-icon):not(.nav-chevron) {
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow-wrap: anywhere
+}
+
+.nav-primary-toggle {
+    min-height: 52px;
+    padding: 10px 13px;
+    border-radius: 14px;
+    background: linear-gradient(105deg, #ff641d, #ff6c22);
+    color: #fff;
+    font-weight: 650
+}
+
+.nav-primary-toggle:hover,
+.nav-primary-toggle.route-active,
+.nav-primary-toggle[aria-expanded="true"] {
+    background: linear-gradient(105deg, #ff641d, #ff6c22);
+    color: #fff
+}
+
+.nav-chevron {
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 20px;
+    transition: transform .18s ease
+}
+
+.nav-disclosure-toggle[aria-expanded="false"] .nav-chevron {
+    transform: rotate(-90deg)
+}
+
+.nav-disclosure-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 5px 0 1px 8px
+}
+
+.nav-disclosure-content[hidden] {
+    display: none
+}
+
+.nav-disclosure-nested {
+    margin: 2px 0 1px 4px
+}
+
+.nav-nested-toggle {
+    min-height: 43px;
+    padding: 8px 10px;
+    color: #514942;
+    font-weight: 600
+}
+
+.nav-nested-toggle.route-active {
+    color: #df6728
+}
+
+.nav-nested-content {
+    margin-left: 10px;
+    padding: 3px 0 4px 8px;
+    border-left: 1px solid #f0ddd0
+}
+
+.nav-link-compact {
+    min-height: 42px;
+    padding: 8px 9px;
+    gap: 9px
+}
+
+.nav-link-compact .nav-icon {
+    width: 19px;
+    height: 19px;
+    flex-basis: 19px;
+    color: #9b8170
+}
+
+.nav-link-compact.active .nav-icon {
+    color: inherit
+}
+
 .nav-icon {
     width: 19px;
     height: 19px;
@@ -3712,6 +3849,26 @@ tbody tr:hover .row-actions {
 .student-wizard-nav button.active span {
     background: #17638a;
     color: #fff
+}
+
+@media(min-width:1181px) {
+    .sidebar {
+        width: 280px
+    }
+
+    .main-area {
+        margin-left: 280px
+    }
+}
+
+@media(min-width:821px) and (max-width:1180px) {
+    .sidebar {
+        width: 250px
+    }
+
+    .main-area {
+        margin-left: 250px
+    }
 }
 
 .student-step-panel {
