@@ -559,3 +559,11 @@
 @media (prefers-reduced-motion: reduce) {
   .auth-page *, .auth-page *::before, .auth-page *::after { transition-duration: .01ms !important; }
 }
+
+/* Keep login copy readable on desktop and mobile; compact supporting text stays at 12–14px. */
+.auth-eyebrow, .auth-story-footer, .auth-panel-top, .auth-secure, .auth-demo-copy span,
+.auth-disclaimer, .auth-copyright, .account-menu-label { font-size: 12px; }
+.auth-story-copy p, .auth-heading p, .auth-label, .auth-text-button, .auth-message,
+.auth-demo-copy strong, .auth-demo-card button, .account-menu > strong,
+.account-menu > button { font-size: 14px; }
+.auth-input-wrap input, .auth-submit { font-size: 16px; }
