@@ -55,8 +55,8 @@
       {key:'customerCode',label:'รหัสรายการ',type:'text',required:true,autoCode:true},{key:'prefix',label:'คำนำหน้า',type:'select',options:['นาย','นาง','นางสาว','เด็กชาย','เด็กหญิง','ดร.','อื่น ๆ']},{key:'firstName',label:'ชื่อ / ชื่อผู้ประสานงาน',type:'text',required:true},{key:'lastName',label:'นามสกุล',type:'text'},{key:'customerType',label:'ประเภทข้อมูล',type:'radio-group',options:['บุคคล','องค์กร'],required:true},{key:'phone',label:'เบอร์โทรศัพท์',type:'tel'},{key:'email',label:'Email',type:'email'},{key:'lineId',label:'Line ID',type:'text'},{key:'province',label:'จังหวัด',type:'text'},{key:'country',label:'ประเทศ',type:'select',options:['ไทย','สิงคโปร์','มาเลเซีย','ญี่ปุ่น','เกาหลีใต้','ออสเตรเลีย','สหรัฐอเมริกา','อื่น ๆ']},{key:'affiliation',label:'หน่วยงาน/โรงเรียน/บริษัท',type:'text',wide:true},{key:'owner',label:'ผู้รับผิดชอบ',type:'select',options:['น.ส. ศิริวรรณ จันทร์ดี','น.ส. ศิริวรรณ จันทร์ดี (ตัวอย่าง)','นายปริญญา จันทร์ดี','นายปริญญา จันทร์ดี (ตัวอย่าง)','น.ส. อรณิชา ใจดี','น.ส. อรณิชา ใจดี (ตัวอย่าง)','ผู้ดูแลระบบ']},{key:'groups',label:'กลุ่มลูกค้า',type:'checkbox-group',options:['A0','A1','A2','B0','B1','B2','C','D'],span:4}
     ]},
     budgets: {
-      title: 'งบประมาณรายได้', singular: 'โครงการ', description: 'บันทึกยอดรายได้รวมและค่าใช้จ่ายรวม พร้อมคำนวณกำไร/ขาดทุนแยกเป็นรายโครงการ', columns: [['code', 'รหัสงบ'], ['projectName', 'ชื่อโครงการ'], ['activityId', 'กิจกรรมที่เกี่ยวข้อง'], ['incomeTotal', 'รายได้รวม (บาท)'], ['expenseTotal', 'ค่าใช้จ่ายรวม (บาท)'], ['net', 'กำไร/ขาดทุน (บาท)'], ['type', 'ประเภทงาน'], ['status', 'สถานะ'], ['owner', 'ผู้รับผิดชอบ'], ['approvalDocument', 'เอกสารอนุมัติ'], ['receiptDocument', 'เอกสารใบเสร็จ']], fields: [
-        { key: 'code', label: 'รหัสงบ', type: 'text', required: true }, { key: 'projectName', label: 'ชื่อโครงการ', type: 'text', required: true }, { key: 'incomeTotal', label: 'รายได้รวม (บาท)', type: 'number', required: true }, { key: 'expenseTotal', label: 'ค่าใช้จ่ายรวม (บาท)', type: 'number', required: true }, { key: 'type', label: 'ประเภทงาน', type: 'select', options: ['กิจกรรมประชาสัมพันธ์', 'Workshop', 'Camp', 'Short Course', 'อื่น ๆ'], required: true }, { key: 'owner', label: 'ผู้รับผิดชอบ', type: 'text', required: true }, { key: 'activityId', label: 'กิจกรรมที่เกี่ยวข้อง', type: 'activity' }, { key: 'approvalDocument', label: 'เอกสารอนุมัติ', type: 'file', wide: true }, { key: 'receiptDocument', label: 'เอกสารใบเสร็จ', type: 'file', wide: true }
+      title: 'งบประมาณรายได้', singular: 'โครงการ', description: 'บันทึกยอดรายได้รวมและค่าใช้จ่ายรวม พร้อมคำนวณกำไร/ขาดทุนแยกเป็นรายโครงการ', columns: [['code', 'รหัสงบ'], ['projectName', 'ชื่อโครงการ'], ['activityId', 'กิจกรรมที่เกี่ยวข้อง'], ['incomeTotal', 'รายได้รวม (บาท)'], ['expenseTotal', 'ค่าใช้จ่ายรวม (บาท)'], ['net', 'กำไร/ขาดทุน (บาท)'], ['type', 'ประเภทงาน'], ['status', 'สถานะ'], ['owner', 'ผู้รับผิดชอบ']], fields: [
+        { key: 'code', label: 'รหัสงบ', type: 'text', required: true }, { key: 'projectName', label: 'ชื่อโครงการ', type: 'text', required: true }, { key: 'incomeTotal', label: 'รายได้รวม (บาท)', type: 'number', required: true }, { key: 'expenseTotal', label: 'ค่าใช้จ่ายรวม (บาท)', type: 'number', required: true }, { key: 'type', label: 'ประเภทงาน', type: 'select', options: ['กิจกรรมประชาสัมพันธ์', 'Workshop', 'Camp', 'Short Course', 'อื่น ๆ'], required: true }, { key: 'owner', label: 'ผู้รับผิดชอบ', type: 'text', required: true }, { key: 'activityId', label: 'กิจกรรมที่เกี่ยวข้อง', type: 'activity' }
       ]
     },
     agreements: {title:'MOU / MOA', singular:'บันทึกความร่วมมือ', description:'จัดการเอกสาร MOU/MOA คู่ความร่วมมือ ระยะเวลาสัญญา และรายละเอียดขอบเขตความร่วมมือ', columns:[['sequence','ลำดับ'],['agreementType','MOU/MOA'],['docNo','เลขที่เอกสาร'],['partner','Partner'],['documentStatus','สถานะเอกสาร'],['signedDate','วันที่ลงนาม'],['startDate','วันที่เริ่ม'],['endDate','วันที่หมดอายุ'],['cooperationStatus','สถานะความร่วมมือ'],['attachment','ไฟล์เอกสาร']], fields:[
@@ -682,7 +682,6 @@
       if (key === 'incomeTotal' || key === 'expenseTotal') return budgetMoney(row[key]);
       if (key === 'net') { const net = budgetNet(row); return `<span class="budget-net ${net < 0 ? 'budget-negative' : net > 0 ? 'budget-positive' : ''}">${net < 0 ? '−' : ''}${budgetMoney(Math.abs(net))}</span>`; }
       if (key === 'status') { const outcome = budgetOutcome(row); const color = outcome === 'มีกำไร' ? 'green' : outcome === 'ขาดทุน' ? 'orange' : ''; return `<span class="tag ${color}">${outcome}</span>`; }
-      if (key === 'approvalDocument' || key === 'receiptDocument') { return row[key] ? `<button class="file-cell-button" type="button" title="${escapeHtml(row[key])}" data-open-budget-document="${escapeHtml(row.id)}" data-budget-document-type="${key}">${iconSvg('file', 14)} ดูไฟล์</button>` : `<button class="file-cell-button file-cell-upload" type="button" data-upload-budget-document="${escapeHtml(row.id)}" data-budget-document-type="${key}">${iconSvg('upload', 14)} อัปโหลด</button>`; }
     }
     if(entity==='jointCourses'){
       if(key==='projectCode')return `<span class="cell-primary">${escapeHtml(row.projectCode||'—')}</span>`;
@@ -813,7 +812,7 @@
     if(!('indexedDB'in window))return Promise.reject(new Error('IndexedDB is unavailable'));
     return new Promise((resolve,reject)=>{
       const request=indexedDB.open('one-journey-attachments',3);
-      request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains('agreements'))request.result.createObjectStore('agreements',{keyPath:'id'});if(!request.result.objectStoreNames.contains('intlRelations'))request.result.createObjectStore('intlRelations',{keyPath:'id'}); if (!request.result.objectStoreNames.contains('budgetAttachments')) request.result.createObjectStore('budgetAttachments', { keyPath: 'id' }); if (!request.result.objectStoreNames.contains('activityAttachments')) request.result.createObjectStore('activityAttachments', { keyPath: 'id' });};
+      request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains('agreements'))request.result.createObjectStore('agreements',{keyPath:'id'});if(!request.result.objectStoreNames.contains('intlRelations'))request.result.createObjectStore('intlRelations',{keyPath:'id'});if(!request.result.objectStoreNames.contains('activityAttachments'))request.result.createObjectStore('activityAttachments',{keyPath:'id'});};
       request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error||new Error('Could not open attachment storage'));
     });
   }
@@ -837,24 +836,6 @@
     const result=await new Promise((resolve,reject)=>{const request=db.transaction('intlRelations','readonly').objectStore('intlRelations').get(recordId);request.onsuccess=()=>resolve(request.result||null);request.onerror=()=>reject(request.error||new Error('Could not read attachment'));});
     db.close();return result;
   }
-  async function saveBudgetAttachment(recordId, documentKey, file) {
-    const db = await openAttachmentDatabase();
-    const key = `${recordId}:${documentKey}`;
-    await new Promise((resolve, reject) => { const tx = db.transaction('budgetAttachments', 'readwrite'); tx.objectStore('budgetAttachments').put({ id: key, recordId, documentKey, name: file.name, type: file.type, blob: file, updatedAt: new Date().toISOString() }); tx.oncomplete = resolve; tx.onerror = () => reject(tx.error || new Error('Could not save budget attachment')); tx.onabort = () => reject(tx.error || new Error('Budget attachment save was aborted')); });
-    db.close();
-  }
-  async function readBudgetAttachment(recordId, documentKey) {
-    const db = await openAttachmentDatabase();
-    const key = `${recordId}:${documentKey}`;
-    const result = await new Promise((resolve, reject) => { const request = db.transaction('budgetAttachments', 'readonly').objectStore('budgetAttachments').get(key); request.onsuccess = () => resolve(request.result || null); request.onerror = () => reject(request.error || new Error('Could not read budget attachment')); });
-    db.close(); return result;
-  }
-  async function openBudgetAttachment(recordId, documentKey) {
-    const popup = window.open('about:blank', '_blank');
-    try { const stored = await readBudgetAttachment(recordId, documentKey); if (!stored?.blob) { popup?.close(); toast('ไม่พบไฟล์แนบในเบราว์เซอร์นี้'); return; } const url = URL.createObjectURL(stored.blob); if (popup) { popup.location.href = url; setTimeout(() => URL.revokeObjectURL(url), 60000); } else { const anchor = document.createElement('a'); anchor.href = url; anchor.download = stored.name; anchor.click(); setTimeout(() => URL.revokeObjectURL(url), 10000); } }
-    catch (error) { popup?.close(); console.warn('Could not open budget attachment', error); toast('เปิดไฟล์งบประมาณไม่ได้ กรุณาลองอีกครั้ง'); }
-  }
-
   async function saveActivityAttachment(recordId, file) {
     const db = await openAttachmentDatabase();
     await new Promise((resolve, reject) => { const tx = db.transaction('activityAttachments', 'readwrite'); tx.objectStore('activityAttachments').put({ id: recordId, name: file.name, type: file.type, blob: file, updatedAt: new Date().toISOString() }); tx.oncomplete = resolve; tx.onerror = () => reject(tx.error || new Error('Could not save activity attachment')); tx.onabort = () => reject(tx.error || new Error('Activity attachment save was aborted')); });
@@ -1149,11 +1130,7 @@ $('#recordModal').showModal();
       }else if(field.type==='textarea'){
         input=`<textarea class="form-control textarea" name="${field.key}" ${required} placeholder="${escapeHtml(field.label)}">${escapeHtml(value)}</textarea>`;
       }else if (field.type === 'file') {
-        if (entity === 'budgets') {
-          const inputId = `budget-${field.key}`;
-          const documentName = existing?.[field.key] || 'ยังไม่ได้เลือกไฟล์';
-          input = `<label class="agreement-upload-dropzone intl-upload-dropzone" for="${inputId}"><input id="${inputId}" name="${field.key}" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png" data-budget-document-input="${field.key}"><span class="agreement-upload-icon">${iconSvg('upload', 20)}</span><strong>คลิกหรือลากไฟล์มาวางที่นี่</strong><small>PDF, Word, JPG หรือ PNG · ไม่เกิน 20 MB</small><span data-budget-document-name="${field.key}" class="agreement-file-name">${escapeHtml(documentName)}</span></label>`;
-        } else if (entity === 'activities') {
+        if (entity === 'activities') {
           const inputId = `activity-${field.key}`;
           const documentName = existing?.[field.key] || 'ยังไม่ได้เลือกไฟล์';
           input = `<label class="agreement-upload-dropzone intl-upload-dropzone" for="${inputId}"><input id="${inputId}" name="${field.key}" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png" data-activity-document-input><span class="agreement-upload-icon">${iconSvg('upload', 20)}</span><strong>คลิกหรือลากไฟล์มาวางที่นี่</strong><small>PDF, Word, JPG หรือ PNG · ไม่เกิน 20 MB</small><span data-activity-document-name class="agreement-file-name">${escapeHtml(documentName)}</span></label>`;
@@ -1204,11 +1181,10 @@ $('#recordModal').showModal();
       $$('[data-intl-save-action]').forEach(button=>button.addEventListener('click',()=>{const form=$('#recordForm');form.dataset.openIntlAction=button.dataset.intlSaveAction;saveRecord(form);}));
       setupInternationalUpload();
     }
-    if (entity === 'budgets' || entity === 'activities') setupBudgetUploads();
+    if (entity === 'activities') setupActivityUploads();
     $('#recordModal').showModal();
   }
-  function setupBudgetUploads() {
-    $$('[data-budget-document-input]').forEach(input => input.addEventListener('change', () => { const name = $(`[data-budget-document-name="${input.dataset.budgetDocumentInput}"]`); if (name && input.files?.[0]) name.textContent = input.files[0].name; }));
+  function setupActivityUploads() {
     $$('[data-activity-document-input]').forEach(input => input.addEventListener('change', () => { const name = $('[data-activity-document-name]'); if (name && input.files?.[0]) name.textContent = input.files[0].name; }));
   }
 async function saveRecord(form){
@@ -1259,7 +1235,7 @@ async function saveRecord(form){
       if((body.relatedActivityIds||[]).some(id=>!allActivities().some(activity=>activity.id===id))||(body.relatedProductIds||[]).some(id=>!data('products').some(product=>product.id===id))){toast('มีกิจกรรมหรือหลักสูตรที่ถูกลบไปแล้ว กรุณาเลือกข้อมูลต้นทางใหม่');return;}
     }
     const recordFiles = [];
-    const documentKeys = entity === 'budgets' ? ['approvalDocument', 'receiptDocument'] : entity === 'activities' ? ['relatedDocument'] : [];
+    const documentKeys = entity === 'activities' ? ['relatedDocument'] : [];
     for (const key of documentKeys) {
       const file = form.elements.namedItem(key)?.files?.[0]; if (!file) continue;
       const extension = file.name.split('.').pop().toLocaleLowerCase('en'); if (!['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'].includes(extension)) { toast('ชนิดไฟล์ไม่รองรับ กรุณาเลือก PDF, Word, JPG หรือ PNG'); return; }
@@ -1278,10 +1254,9 @@ async function saveRecord(form){
     const savedId=recordId||id(entity==='a0Participants'?'A0':entity==='activities'?'EVT':entity==='jointCourses'?'JNT':entity==='intlRelations'?'INT':entity.slice(0,3).toUpperCase());
     for (const { key, file } of recordFiles) {
       try {
-        if (entity === 'budgets') await saveBudgetAttachment(savedId, key, file);
-        else await saveActivityAttachment(savedId, file);
+        await saveActivityAttachment(savedId, file);
         body[key] = file.name; body[`${key}Type`] = file.type; body[`${key}Size`] = file.size;
-      } catch (error) { console.warn('Could not save record attachment', error); toast(entity === 'budgets' ? 'บันทึกเอกสารงบประมาณไม่สำเร็จ กรุณาลองอีกครั้ง' : 'บันทึกเอกสารกิจกรรมไม่สำเร็จ กรุณาลองอีกครั้ง'); return; }
+      } catch (error) { console.warn('Could not save record attachment', error); toast('บันทึกเอกสารกิจกรรมไม่สำเร็จ กรุณาลองอีกครั้ง'); return; }
     }
     if(entity==='intlRelations'&&intlFile){try{await saveIntlRelationAttachment(savedId,intlFile);body.attachmentName=intlFile.name;body.attachmentType=intlFile.type;body.attachmentSize=intlFile.size;}catch(error){console.warn('Could not save university attachment',error);toast('บันทึกเอกสารประกอบไม่สำเร็จ กรุณาลองอีกครั้ง');return;}}
     let savedRecord;
@@ -1392,8 +1367,6 @@ async function saveRecord(form){
     $$('[data-open-product]',root).forEach(button=>button.addEventListener('click',()=>openProductView(button.dataset.openProduct)));
     $$('[data-budget-a2]',root).forEach(button=>button.addEventListener('click',()=>{const record=data('jointCourses').find(row=>row.id===button.dataset.budgetA2);if(record)openBudgetForA2(record);}));
     $$('[data-view-agreement]',root).forEach(button=>button.addEventListener('click',()=>openAgreementView(button.dataset.viewAgreement)));
-    $$('[data-open-budget-document]', root).forEach(button => button.addEventListener('click', () => openBudgetAttachment(button.dataset.openBudgetDocument, button.dataset.budgetDocumentType)));
-    $$('[data-upload-budget-document]', root).forEach(button => button.addEventListener('click', () => { const documentType = button.dataset.budgetDocumentType; openForm('budgets', button.dataset.uploadBudgetDocument); requestAnimationFrame(() => $(`[data-budget-document-input="${documentType}"]`)?.closest('.form-field')?.scrollIntoView({ block: 'center', behavior: 'smooth' })); }));
     $$('[data-open-activity-document]', root).forEach(button => button.addEventListener('click', () => openActivityAttachment(button.dataset.openActivityDocument)));
     $$('[data-upload-activity-document]', root).forEach(button => button.addEventListener('click', () => { openForm('activities', button.dataset.uploadActivityDocument); requestAnimationFrame(() => $('[data-activity-document-input]')?.closest('.form-field')?.scrollIntoView({ block: 'center', behavior: 'smooth' })); }));
     $$('[data-add-activity-budget]', root).forEach(button => button.addEventListener('click', () => {
