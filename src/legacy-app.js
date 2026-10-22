@@ -464,7 +464,7 @@
     ['alumni','C','ศิษย์เก่า'],
     ['studentHistories','D','ประวัตินักเรียน']
   ];
-  const groupTabRoutes=new Set([...groupTabs.map(([route])=>route),'activities']);
+  const groupTabRoutes=new Set(groupTabs.map(([route])=>route));
   function navItemMarkup(item){
     if(item.type==='link')return `<a href="#${item.route}" class="nav-link${item.compact?' nav-link-compact':''}" data-route="${item.route}"><span class="nav-icon">${iconSvg(item.icon,18)}</span><span>${escapeHtml(item.label)}</span></a>`;
     const children=item.children.map(navItemMarkup).join('');
@@ -494,7 +494,7 @@
     const selectedRoute=currentRoute.startsWith('activity:')?'a0Participants':currentRoute.startsWith('student:')?'studentHistories':currentRoute;
     return `<nav class="group-tabs" aria-label="กลุ่มข้อมูล A0 ถึง D">${groupTabs.map(([route,code,label])=>`<a class="group-tab" href="#${route}" aria-label="${code} · ${label}" ${selectedRoute===route?'aria-current="page"':''} data-route="${route}">${code}</a>`).join('')}</nav>`;
   }
-  function shouldShowGroupTabs(){return groupTabRoutes.has(currentRoute)||currentRoute.startsWith('activity:')||currentRoute.startsWith('student:');}
+  function shouldShowGroupTabs(){return groupTabRoutes.has(currentRoute)||currentRoute.startsWith('student:');}
   function go(route){currentRoute=route;currentGlobalQuery='';if(route!=='search')location.hash=route;render();$('#sidebar').classList.remove('open');}
 
   function toolbarActions(actions=''){return actions?`<div class="toolbar-actions">${actions}</div>`:'';}
