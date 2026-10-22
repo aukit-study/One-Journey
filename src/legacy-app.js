@@ -383,10 +383,26 @@
     {label:'เครือข่ายกลุ่ม B',items:[['potentialPartners','B0 · Potential Partner','network'],['schools','B1 · โรงเรียนคู่ความร่วมมือ','school'],['intlRelations','B2 · มหาวิทยาลัย / วิเทศสัมพันธ์','globe']]},
     {label:'บุคคลและเส้นทางการศึกษา',items:[['alumni','C · ศิษย์เก่า','graduation'],['studentHistories','D · ประวัตินักเรียน','route']]}
   ];
+  const groupTabs=[
+    ['a0Participants','A0','ผู้เข้าร่วมกิจกรรม'],
+    ['applicants','A1','ผู้สมัครหลักสูตร'],
+    ['jointCourses','A2','หลักสูตรร่วม'],
+    ['potentialPartners','B0','Potential Partner'],
+    ['schools','B1','โรงเรียนคู่ความร่วมมือ'],
+    ['intlRelations','B2','วิเทศสัมพันธ์'],
+    ['alumni','C','ศิษย์เก่า'],
+    ['studentHistories','D','ประวัตินักเรียน']
+  ];
+  const groupTabRoutes=new Set([...groupTabs.map(([route])=>route),'activities']);
   function renderNav(){
     $('#nav').innerHTML=navSections.map(section=>`<div class="nav-group-label">${escapeHtml(section.label)}</div>${section.items.map(([key,label,icon])=>`<a href="#${key}" class="nav-link" data-route="${key}"><span class="nav-icon">${iconSvg(icon,17)}</span><span>${escapeHtml(label)}</span></a>`).join('')}`).join('');
     $$('#nav [data-route]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();go(link.dataset.route);}));
   }
+  function renderGroupTabs(){
+    const selectedRoute=currentRoute.startsWith('activity:')?'a0Participants':currentRoute.startsWith('student:')?'studentHistories':currentRoute;
+    return `<nav class="group-tabs" aria-label="กลุ่มข้อมูล A0 ถึง D">${groupTabs.map(([route,code,label])=>`<a class="group-tab" href="#${route}" aria-label="${code} · ${label}" ${selectedRoute===route?'aria-current="page"':''} data-route="${route}">${code}</a>`).join('')}</nav>`;
+  }
+  function shouldShowGroupTabs(){return groupTabRoutes.has(currentRoute)||currentRoute.startsWith('activity:')||currentRoute.startsWith('student:');}
   function go(route){currentRoute=route;currentGlobalQuery='';if(route!=='search')location.hash=route;render();$('#sidebar').classList.remove('open');}
   function backupButton(){return button('สำรองข้อมูล JSON','download-json','button-quiet','download');}
   function toolbarActions(actions=''){return `<div class="toolbar-actions">${actions}${backupButton()}</div>`;}
@@ -414,6 +430,7 @@
       else if(currentRoute.startsWith('student:'))root.innerHTML=renderStudentJourney(currentRoute.split(':')[1]);
       else if(schemas[currentRoute])root.innerHTML=renderEntityPage(currentRoute);
       else {currentRoute='overview';root.innerHTML=renderOverview();updateNavState();}
+      if(shouldShowGroupTabs())root.insertAdjacentHTML('afterbegin',renderGroupTabs());
       bindActions(root);
     }catch(error){console.error('One Journey render failed',currentRoute,error);root.innerHTML=`<div class="notice-card"><strong>เปิดหน้านี้ไม่สำเร็จ</strong><br>${escapeHtml(error.message||'เกิดข้อผิดพลาดที่ไม่ทราบสาเหตุ')}</div>`;}
   }

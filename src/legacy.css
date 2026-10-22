@@ -3903,3 +3903,65 @@ th, td, .icon-action, .empty-state, .module-card p, .activity-head p, .form-fiel
         flex-wrap: wrap;
     }
 }
+
+/* Group tabs for switching between the A0–D customer data modules. */
+.group-tabs {
+    display: flex;
+    align-items: stretch;
+    gap: 6px;
+    min-width: 0;
+    margin: -3px 0 20px;
+    overflow-x: auto;
+    border-bottom: 1px solid #e6e8ed;
+    scrollbar-width: thin;
+    scrollbar-color: #d9dce3 transparent;
+}
+
+.group-tab {
+    display: flex;
+    flex: 1 0 96px;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+    padding: 10px 16px;
+    border: 1px solid #e6e8ed;
+    border-bottom: 0;
+    border-radius: 12px 12px 0 0;
+    background: #fff;
+    color: #292c33;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color .16s, color .16s, border-color .16s;
+}
+
+.group-tab:hover {
+    border-color: #b7c6ff;
+    background: #f5f7ff;
+}
+
+.group-tab[aria-current="page"] {
+    border-color: #155eef;
+    background: #155eef;
+    color: #fff;
+}
+
+.group-tab:focus-visible {
+    position: relative;
+    z-index: 1;
+    outline: 3px solid #ff9a45;
+    outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+    .group-tabs {
+        gap: 4px;
+        margin: -2px -2px 16px;
+    }
+
+    .group-tab {
+        flex-basis: 82px;
+        min-height: 48px;
+        padding: 8px 12px;
+    }
+}
