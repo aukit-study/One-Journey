@@ -50,8 +50,8 @@
   const yesNo = ['ใช่','ไม่ใช่'];
 
   const schemas = {
-    members: {title:'ทะเบียนสมาชิกกลาง', singular:'สมาชิก', description:'ข้อมูลสมาชิกกลางเพื่อเชื่อมประวัติการมีส่วนร่วมข้ามกิจกรรม หลักสูตร และหน่วยงาน', columns:[['name','สมาชิก'],['email','อีเมล'],['phone','เบอร์โทรศัพท์'],['group','กลุ่มข้อมูล'],['category','ประเภทสมาชิก'],['affiliation','โรงเรียน / หน่วยงาน'],['status','สถานะ']], fields:[
-      {key:'name',label:'ชื่อ-นามสกุล',type:'text',required:true},{key:'email',label:'อีเมล',type:'email',required:true},{key:'phone',label:'เบอร์โทรศัพท์',type:'tel'},{key:'group',label:'กลุ่มข้อมูลหลัก',type:'select',options:['A0','A1','A2','B','C','D'],required:true},{key:'category',label:'ประเภทสมาชิก',type:'select',options:['นักเรียน ม.ปลาย','นักศึกษา','ศิษย์เก่า','ผู้ประกอบการ','บุคลากร','อาจารย์','ผู้บริหาร','บุคคลทั่วไป']},{key:'affiliation',label:'โรงเรียน / หน่วยงาน',type:'text'},{key:'status',label:'สถานะ',type:'select',options:['ใช้งาน','รอตรวจสอบ','ระงับ','ไม่ประสงค์รับข่าวสาร']},{key:'notes',label:'หมายเหตุ',type:'textarea',wide:true}
+    members: {title:'ข้อมูลเบื้องต้นลูกค้าสัมพันธ์', singular:'ลูกค้า', description:'ทะเบียนข้อมูลติดต่อและกลุ่มความสัมพันธ์ของบุคคลหรือองค์กร เพื่อเชื่อมต่อกับกิจกรรมและข้อมูล A0–D', columns:[['customerCode','รหัสรายการ'],['prefix','คำนำหน้า'],['firstName','ชื่อ'],['lastName','นามสกุล'],['customerType','ประเภทข้อมูล'],['groups','กลุ่ม'],['phone','เบอร์โทร'],['email','Email'],['lineId','Line ID'],['province','จังหวัด'],['country','ประเทศ'],['affiliation','หน่วยงาน/โรงเรียน/บริษัท'],['owner','ผู้รับผิดชอบ']], fields:[
+      {key:'customerCode',label:'รหัสรายการ',type:'text',required:true,autoCode:true},{key:'prefix',label:'คำนำหน้า',type:'select',options:['นาย','นาง','นางสาว','เด็กชาย','เด็กหญิง','ดร.','อื่น ๆ']},{key:'firstName',label:'ชื่อ / ชื่อผู้ประสานงาน',type:'text',required:true},{key:'lastName',label:'นามสกุล',type:'text'},{key:'customerType',label:'ประเภทข้อมูล',type:'radio-group',options:['บุคคล','องค์กร'],required:true},{key:'phone',label:'เบอร์โทรศัพท์',type:'tel'},{key:'email',label:'Email',type:'email'},{key:'lineId',label:'Line ID',type:'text'},{key:'province',label:'จังหวัด',type:'text'},{key:'country',label:'ประเทศ',type:'select',options:['ไทย','สิงคโปร์','มาเลเซีย','ญี่ปุ่น','เกาหลีใต้','ออสเตรเลีย','สหรัฐอเมริกา','อื่น ๆ']},{key:'affiliation',label:'หน่วยงาน/โรงเรียน/บริษัท',type:'text',wide:true},{key:'owner',label:'ผู้รับผิดชอบ',type:'select',options:['น.ส. ศิริวรรณ จันทร์ดี','น.ส. ศิริวรรณ จันทร์ดี (ตัวอย่าง)','นายปริญญา จันทร์ดี','นายปริญญา จันทร์ดี (ตัวอย่าง)','น.ส. อรณิชา ใจดี','น.ส. อรณิชา ใจดี (ตัวอย่าง)','ผู้ดูแลระบบ']},{key:'groups',label:'กลุ่มลูกค้า',type:'checkbox-group',options:['A0','A1','A2','B0','B1','B2','C','D'],span:4}
     ]},
     budgets: {title:'งบประมาณรายได้', singular:'โครงการ', description:'บันทึกยอดรายได้รวมและค่าใช้จ่ายรวม พร้อมคำนวณกำไร/ขาดทุนแยกเป็นรายโครงการ', columns:[['code','รหัสงบ'],['projectName','ชื่อโครงการ'],['incomeTotal','รายได้รวม (บาท)'],['expenseTotal','ค่าใช้จ่ายรวม (บาท)'],['net','กำไร/ขาดทุน (บาท)'],['type','ประเภทงาน'],['status','สถานะ'],['owner','ผู้รับผิดชอบ']], fields:[
       {key:'code',label:'รหัสงบ',type:'text',required:true},{key:'projectName',label:'ชื่อโครงการ',type:'text',required:true},{key:'incomeTotal',label:'รายได้รวม (บาท)',type:'number',required:true},{key:'expenseTotal',label:'ค่าใช้จ่ายรวม (บาท)',type:'number',required:true},{key:'type',label:'ประเภทงาน',type:'select',options:['กิจกรรมประชาสัมพันธ์','Workshop','Camp','Short Course','อื่น ๆ'],required:true},{key:'owner',label:'ผู้รับผิดชอบ',type:'text',required:true}
@@ -130,9 +130,9 @@
       {id:'PRD-004',name:'หลักสูตรระยะสั้น BRIDGE',type:'หลักสูตรระยะสั้น',level:'ระยะสั้น',branch:'BRIDGE',unit:'BRIDGE',status:'เปิดใช้งาน',description:'หลักสูตรระยะสั้นและหลักสูตรร่วมตามแผนผังโครงสร้าง',expectedSkills:'กำหนดตามแต่ละรุ่น'}
     ],
     members:[
-      {id:'MEM-001',name:'ผู้เข้าร่วมตัวอย่าง 01',email:'demo01@example.invalid',phone:'0800000001',group:'A0',category:'นักเรียน ม.ปลาย',affiliation:'โรงเรียนตัวอย่าง',status:'ใช้งาน'},
-      {id:'MEM-002',name:'ผู้เข้าร่วมตัวอย่าง 02',email:'demo02@example.invalid',phone:'0800000002',group:'A0',category:'นักศึกษา',affiliation:'มหาวิทยาลัยตัวอย่าง',status:'ใช้งาน'},
-      {id:'MEM-003',name:'ผู้สมัครตัวอย่าง 01',email:'applicant@example.invalid',phone:'0800000003',group:'A1',category:'ผู้สมัครหลักสูตร',affiliation:'โรงเรียนตัวอย่าง',status:'ใช้งาน'}
+      {id:'MEM-001',customerCode:'MI-2569-000321',prefix:'นาย',firstName:'ผู้เข้าร่วมตัวอย่าง',lastName:'01',name:'ผู้เข้าร่วมตัวอย่าง 01',customerType:'บุคคล',email:'demo01@example.invalid',phone:'0800000001',lineId:'',province:'เชียงใหม่',country:'ไทย',group:'A0',groups:['A0'],category:'นักเรียน ม.ปลาย',affiliation:'โรงเรียนตัวอย่าง',owner:'น.ส. ศิริวรรณ จันทร์ดี',status:'ใช้งาน'},
+      {id:'MEM-002',customerCode:'MI-2569-000322',prefix:'นาย',firstName:'ผู้เข้าร่วมตัวอย่าง',lastName:'02',name:'ผู้เข้าร่วมตัวอย่าง 02',customerType:'บุคคล',email:'demo02@example.invalid',phone:'0800000002',lineId:'',province:'เชียงใหม่',country:'ไทย',group:'A0',groups:['A0'],category:'นักศึกษา',affiliation:'มหาวิทยาลัยตัวอย่าง',owner:'นายปริญญา จันทร์ดี',status:'ใช้งาน'},
+      {id:'MEM-003',customerCode:'MI-2569-000323',prefix:'นาย',firstName:'ผู้สมัครตัวอย่าง',lastName:'01',name:'ผู้สมัครตัวอย่าง 01',customerType:'บุคคล',email:'applicant@example.invalid',phone:'0800000003',lineId:'',province:'เชียงใหม่',country:'ไทย',group:'A1',groups:['A1'],category:'ผู้สมัครหลักสูตร',affiliation:'โรงเรียนตัวอย่าง',owner:'น.ส. อรณิชา ใจดี',status:'ใช้งาน'}
     ],
     activities:[
       {id:'EVT-001',activityCode:'ACT-2609001',activityType:'Open House',name:'CMU Open House 2024 (ตัวอย่าง)',product:'ดิจิทัลเกม',unit:'หน่วยพัฒนานักศึกษา',startDate:'2026-09-15',endDate:'2026-09-15',round:'รอบที่ 2',venue:'วิทยาลัย CAMT',capacity:60,audience:'นักเรียน ม.4–6',walkIn:'ไม่ใช่',checkinMethod:'สแกน QR โดยเจ้าหน้าที่',partner:'โรงเรียนเครือข่ายตัวอย่าง',owner:'น.ส. อรณิชา ใจดี (ตัวอย่าง)',status:'เสร็จสิ้น',description:'กิจกรรมเปิดบ้านแนะนำหลักสูตรและการเรียนการสอน (ข้อมูลตัวอย่าง)'},
@@ -342,6 +342,21 @@
             parsed.data.customerGroups=parsed.demo?structuredClone(seed.customerGroups):[];
             try{localStorage.setItem(STORE_KEY,JSON.stringify(parsed));}catch(error){console.warn('Could not initialize customer groups',error);}
           }
+          const memberRows=Array.isArray(parsed.data.members)?parsed.data.members:[];
+          if(memberRows.some(row=>!row.customerCode||!row.customerType||!Array.isArray(row.groups)||row.firstName===undefined||row.lastName===undefined||row.lineId===undefined||row.country===undefined)){
+            parsed.data.members=memberRows.map((row,index)=>{
+              const fullName=String(row.name||'').trim();
+              const knownPrefixes=['เด็กชาย','เด็กหญิง','นางสาว','นาย','นาง','ดร.','อื่น ๆ'];
+              const prefix=row.prefix||knownPrefixes.find(value=>fullName.startsWith(value))||'';
+              const parts=(prefix?fullName.slice(prefix.length).trim():fullName).split(/\s+/).filter(Boolean);
+              const firstName=row.firstName||parts.shift()||'';
+              const lastName=row.lastName||parts.join(' ');
+              const customerType=row.customerType||(/บริษัท|องค์กร/i.test(row.affiliation||'')?'องค์กร':'บุคคล');
+              const groups=Array.isArray(row.groups)?row.groups:(row.group?[row.group]:[]);
+              return {...row,customerCode:row.customerCode||`MI-2569-${String(index+321).padStart(6,'0')}`,prefix,firstName,lastName,name:row.name||[prefix,firstName,lastName].filter(Boolean).join(' '),customerType,groups,group:row.group||groups[0]||'',lineId:row.lineId||'',province:row.province||'',country:row.country||'ไทย',category:row.category||customerType,owner:row.owner||'',status:row.status||'ใช้งาน'};
+            });
+            try{localStorage.setItem(STORE_KEY,JSON.stringify(parsed));}catch(error){console.warn('Could not migrate customer records',error);}
+          }
           return parsed;
         }
       }
@@ -384,6 +399,7 @@
     const largest=data('budgets').reduce((max,row)=>Math.max(max,Number(String(row.code||'').replace(/\D/g,''))||0),240000);
     return `BG-${String(largest+1).padStart(6,'0')}`;
   };
+  const nextMemberCode = () => {const year=String(new Date().getFullYear()+543);const prefix=`MI-${year}-`;const largest=data('members').reduce((max,row)=>{const code=String(row.customerCode||'');return code.startsWith(prefix)?Math.max(max,Number(code.slice(prefix.length))||0):max;},320);return `${prefix}${String(largest+1).padStart(6,'0')}`;};
   const nextActivityCode = () => `ACT-260${String(data('activities').reduce((max,row)=>Math.max(max,Number(String(row.activityCode||'').replace(/\D/g,''))||0),2600000)-2600000+1).padStart(4,'0')}`;
   const nextA0Code = () => `A0-${String(data('a0Participants').reduce((max,row)=>Math.max(max,Number(String(row.recordCode||'').replace(/\D/g,''))||0),0)+1).padStart(4,'0')}`;
   const nextA2Code = () => `A2-${String(data('jointCourses').reduce((max,row)=>Math.max(max,Number(String(row.projectCode||'').replace(/\D/g,''))||0),2400000)+1).padStart(7,'0')}`;
@@ -397,7 +413,7 @@
   const navSections=[
     {label:'ภาพรวม',items:[['overview','หน้าหลัก','home']]},
     {label:'งบประมาณและความร่วมมือ',items:[['budgets','งบประมาณรายได้','wallet'],['agreements','MOU / MOA','handshake']]},
-    {label:'กลุ่มลูกค้า A',items:[['members','ทะเบียนสมาชิกกลาง','users'],['a0Participants','A0 · ผู้เข้าร่วมกิจกรรม','users'],['activities','กิจกรรม','calendar'],['applicants','A1 · ผู้สมัครหลักสูตร','user'],['jointCourses','A2 · Joint / Inter / Short Course','book'],['products','ทะเบียนโปรดัก / หลักสูตร','package']]},
+    {label:'กลุ่มลูกค้า A',items:[['members','ข้อมูลเบื้องต้นลูกค้า','users'],['a0Participants','A0 · ผู้เข้าร่วมกิจกรรม','users'],['activities','กิจกรรม','calendar'],['applicants','A1 · ผู้สมัครหลักสูตร','user'],['jointCourses','A2 · Joint / Inter / Short Course','book'],['products','ทะเบียนโปรดัก / หลักสูตร','package']]},
     {label:'เครือข่ายกลุ่ม B',items:[['potentialPartners','B0 · Potential Partner','network'],['schools','B1 · โรงเรียนคู่ความร่วมมือ','school'],['intlRelations','B2 · มหาวิทยาลัย / วิเทศสัมพันธ์','globe']]},
     {label:'บุคคลและเส้นทางการศึกษา',items:[['alumni','C · ศิษย์เก่า','graduation'],['studentHistories','D · ประวัตินักเรียน','route']]},
     {label:'ตั้งค่าระบบ',items:[['customerGroups','จัดการกลุ่มลูกค้า','users']]}
@@ -436,6 +452,7 @@
   function allActivities(){return data('activities');}
   function registrationsFor(activityId){return data('registrations').filter(row=>row.activityId===activityId);}
   function memberById(memberId){return data('members').find(member=>member.id===memberId);}
+  function memberGroupCodes(member){return Array.isArray(member?.groups)?member.groups:(member?.group?[member.group]:[]);}
   function updateNavState(){
     $$('#nav [data-route]').forEach(link=>link.classList.toggle('active',link.dataset.route===currentRoute || (currentRoute.startsWith('activity:')&&link.dataset.route==='activities') || (currentRoute.startsWith('student:')&&link.dataset.route==='studentHistories')));
     $('#breadcrumbTitle').textContent=currentRoute==='overview'?'หน้าหลัก':currentRoute==='search'?'ผลการค้นหา':currentRoute.startsWith('activity:')?'ลงทะเบียน / เช็คอิน':currentRoute.startsWith('student:')?'เส้นทางนักเรียน':(schemas[currentRoute]?.title||'หน้าหลัก');
@@ -491,23 +508,27 @@
     if(entity==='agreements')return renderAgreementsPage();
     const schema=schemas[entity];
     const isCustomerGroups=entity==='customerGroups';
-    const actions=isCustomerGroups?`${button('Refresh ข้อมูล','refresh-records','button-quiet','refresh')}${button('สร้างกลุ่มลูกค้า','add-record','button-primary','plus')}`:`${button('ส่งออก CSV','export-csv','button-quiet','download')}${button('เพิ่ม'+schema.singular,'add-record','button-primary','plus')}`;
+    const isMembers=entity==='members';
+    const actions=isCustomerGroups?`${button('Refresh ข้อมูล','refresh-records','button-quiet','refresh')}${button('สร้างกลุ่มลูกค้า','add-record','button-primary','plus')}`:isMembers?button('เพิ่มลูกค้า','add-record','button-primary','plus'):`${button('ส่งออก CSV','export-csv','button-quiet','download')}${button('เพิ่ม'+schema.singular,'add-record','button-primary','plus')}`;
     const q=(window.entitySearch||'').trim().toLocaleLowerCase('th');
     const sourceRows=data(entity);
+    const selectedMemberGroups=Array.isArray(window.memberGroupFilter)?window.memberGroupFilter:[];
     const statusOptions=[...new Set(sourceRows.map(row=>entity==='budgets'?budgetOutcome(row):entity==='schools'?schoolStatus(row):entity==='intlRelations'?intlRelationStatus(row):entity==='alumni'?row.employmentStatus:entity==='studentHistories'?row.currentStage:row.status).filter(Boolean))];
     const selectedStatus=entityStatusByRoute[entity]||'all';
     const rows=sourceRows.filter(row=>{
       const relatedText=entity==='a0Participants'?`${memberById(row.memberId)?.name||''} ${memberById(row.memberId)?.email||''} ${allActivities().find(activity=>activity.id===row.activityId)?.name||''} ${allActivities().find(activity=>activity.id===row.activityId)?.activityCode||''}`:entity==='potentialPartners'?`${row.name||''} ${row.organizationType||''} ${(row.collaborationTypes||[]).join(' ')} ${row.customerGroup||''} ${row.contact||''} ${row.nextAction||''} ${row.owner||''}`:entity==='schools'?`${row.name||''} ${row.province||''} ${row.coordinator||''} ${row.position||''} ${row.collaborationActivities||''} ${(row.relatedActivityIds||[]).map(id=>allActivities().find(activity=>activity.id===id)?.name||'').join(' ')} ${(row.relatedProductIds||[]).map(id=>data('products').find(product=>product.id===id)?.name||'').join(' ')} ${row.owner||''}`:entity==='intlRelations'?`${row.partnerCode||''} ${row.universityName||''} ${row.country||''} ${row.cooperationType||''} ${row.department||''} ${row.coordinator||''} ${row.activityDetails||''} ${row.summary||''} ${row.owner||''} ${(row.relatedActivityIds||[]).map(id=>allActivities().find(activity=>activity.id===id)?.name||'').join(' ')}`:'';
       const matchesQuery=!q||`${JSON.stringify(row)} ${relatedText}`.toLocaleLowerCase('th').includes(q);
       const matchesStatus=selectedStatus==='all'||(entity==='budgets'?budgetOutcome(row)===selectedStatus:entity==='schools'?schoolStatus(row)===selectedStatus:entity==='intlRelations'?intlRelationStatus(row)===selectedStatus:entity==='alumni'?row.employmentStatus===selectedStatus:entity==='studentHistories'?row.currentStage===selectedStatus:row.status===selectedStatus);
-      return matchesQuery&&matchesStatus;
+      const rowGroups=entity==='members'?memberGroupCodes(row):[];
+      const matchesMemberGroup=!isMembers||!selectedMemberGroups.length||selectedMemberGroups.some(group=>rowGroups.includes(group));
+      return matchesQuery&&matchesStatus&&matchesMemberGroup;
     });
-    const tableClass=entity==='a0Participants'?'a0-table':entity==='activities'?'activity-table':entity==='jointCourses'?'a2-table':entity==='potentialPartners'?'potential-partner-table':entity==='schools'?'school-partner-table':entity==='intlRelations'?'international-partner-table':entity==='alumni'?'alumni-table':entity==='studentHistories'?'student-table':'';
+    const tableClass=entity==='members'?'customer-table':entity==='a0Participants'?'a0-table':entity==='activities'?'activity-table':entity==='jointCourses'?'a2-table':entity==='potentialPartners'?'potential-partner-table':entity==='schools'?'school-partner-table':entity==='intlRelations'?'international-partner-table':entity==='alumni'?'alumni-table':entity==='studentHistories'?'student-table':'';
     return `${setHeading(schema.title,schema.description,'',false)}
-      <div class="filter-row list-toolbar ${isCustomerGroups?'customer-groups-toolbar':''}"><input class="search-control" id="entitySearch" type="search" placeholder="ค้นหาใน${escapeHtml(schema.title)}" value="${escapeHtml(window.entitySearch||'')}">${isCustomerGroups?'':`<select class="field-control" id="statusFilter"><option value="all">ทุกสถานะ</option>${statusOptions.map(status=>`<option value="${escapeHtml(status)}" ${selectedStatus===status?'selected':''}>${escapeHtml(status)}</option>`).join('')}</select>`}<span class="filter-spacer"></span>${isCustomerGroups?`<div class="toolbar-actions">${actions}</div>`:toolbarActions(actions)}</div>
-      <section class="panel data-panel"><div class="panel-head"><div><h2>${escapeHtml(schema.title)}</h2><p>${isCustomerGroups?'จัดการรหัสกลุ่มและ Class ให้สอดคล้องกับทะเบียน A0–D · เพิ่มลิงก์แบบฟอร์มได้เมื่อพร้อม':entity==='activities'?'จัดการกิจกรรมและรอบ ส่วนรายชื่อผู้เข้าร่วมและเช็คอินอยู่ในรายละเอียดกิจกรรม':entity==='a0Participants'?'ข้อมูลผู้เข้าร่วมที่เชื่อมกับสมาชิกเดิมและกิจกรรม/รอบ':entity==='jointCourses'?'ข้อมูลโครงการ A2 ตามประเภท ความต้องการผู้เรียน และสถานะการติดตาม':entity==='potentialPartners'?'ติดตามองค์กรเป้าหมาย ระดับโอกาส ความร่วมมือ และขั้นตอนถัดไป · เพิ่มชื่อใหม่ได้จากฟอร์ม':entity==='schools'?'เชื่อมโรงเรียนกับกิจกรรมและหลักสูตรที่เกี่ยวข้อง พร้อมเปิดหน้ารายการต้นทางได้':entity==='intlRelations'?'ติดตามความร่วมมือกับมหาวิทยาลัยต่างประเทศ นักศึกษาแลกเปลี่ยน กิจกรรม เอกสาร และรายได้/ทุน':entity==='alumni'?'ข้อมูลศิษย์เก่าตามภาพตัวอย่าง · ข้อมูลในหน้านี้เป็นข้อมูลสาธิต':'ข้อมูลตัวอย่าง · ใช้ปุ่มแก้ไขเพื่อปรับระเบียนในเครื่อง'}</p></div><span class="tag orange">${rows.length} รายการ</span></div>
+      <div class="filter-row list-toolbar ${isCustomerGroups?'customer-groups-toolbar':''} ${isMembers?'customer-list-toolbar':''}"><input class="search-control" id="entitySearch" type="search" placeholder="${isMembers?'ค้นหาชื่อ / เบอร์โทร / Email / หน่วยงาน':`ค้นหาใน${escapeHtml(schema.title)}`}" value="${escapeHtml(window.entitySearch||'')}">${isMembers?`<div class="member-group-filter" role="group" aria-label="เลือกกลุ่มลูกค้า"><span class="small-label">เลือกกลุ่ม</span>${data('customerGroups').map(group=>`<label><input type="checkbox" data-member-group-filter value="${escapeHtml(group.classCode)}" ${selectedMemberGroups.includes(group.classCode)?'checked':''}><span>${escapeHtml(group.classCode)}</span></label>`).join('')}</div>`:isCustomerGroups?'':`<select class="field-control" id="statusFilter"><option value="all">ทุกสถานะ</option>${statusOptions.map(status=>`<option value="${escapeHtml(status)}" ${selectedStatus===status?'selected':''}>${escapeHtml(status)}</option>`).join('')}</select>`}<span class="filter-spacer"></span>${isCustomerGroups||isMembers?`<div class="toolbar-actions">${actions}</div>`:toolbarActions(actions)}</div>
+      <section class="panel data-panel"><div class="panel-head"><div><h2>${isMembers?'รายชื่อลูกค้าสัมพันธ์':escapeHtml(schema.title)}</h2><p>${isMembers?'ข้อมูลบุคคลและองค์กรที่เชื่อมกับกลุ่มลูกค้าและกิจกรรม · เลือกได้หลายกลุ่ม':isCustomerGroups?'จัดการรหัสกลุ่มและ Class ให้สอดคล้องกับทะเบียน A0–D · เพิ่มลิงก์แบบฟอร์มได้เมื่อพร้อม':entity==='activities'?'จัดการกิจกรรมและรอบ ส่วนรายชื่อผู้เข้าร่วมและเช็คอินอยู่ในรายละเอียดกิจกรรม':entity==='a0Participants'?'ข้อมูลผู้เข้าร่วมที่เชื่อมกับสมาชิกเดิมและกิจกรรม/รอบ':entity==='jointCourses'?'ข้อมูลโครงการ A2 ตามประเภท ความต้องการผู้เรียน และสถานะการติดตาม':entity==='potentialPartners'?'ติดตามองค์กรเป้าหมาย ระดับโอกาส ความร่วมมือ และขั้นตอนถัดไป · เพิ่มชื่อใหม่ได้จากฟอร์ม':entity==='schools'?'เชื่อมโรงเรียนกับกิจกรรมและหลักสูตรที่เกี่ยวข้อง พร้อมเปิดหน้ารายการต้นทางได้':entity==='intlRelations'?'ติดตามความร่วมมือกับมหาวิทยาลัยต่างประเทศ นักศึกษาแลกเปลี่ยน กิจกรรม เอกสาร และรายได้/ทุน':entity==='alumni'?'ข้อมูลศิษย์เก่าตามภาพตัวอย่าง · ข้อมูลในหน้านี้เป็นข้อมูลสาธิต':'ข้อมูลตัวอย่าง · ใช้ปุ่มแก้ไขเพื่อปรับระเบียนในเครื่อง'}</p></div><span class="tag orange">${rows.length} รายการ</span></div>
       <div class="table-scroll"><table class="${tableClass}"><thead><tr>${schema.columns.map(([,label])=>`<th>${escapeHtml(label)}</th>`).join('')}<th>จัดการ</th></tr></thead><tbody>${rows.map((row,rowIndex)=>`<tr>${schema.columns.map(([key])=>`<td>${formatCell(entity,key,row,rowIndex)}</td>`).join('')}<td><div class="row-actions">${entity==='budgets'?`<button class="icon-action view-action" type="button" data-view-budget="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button>`:''}${entity==='activities'?`<button class="icon-action" type="button" data-open-activity="${escapeHtml(row.id)}" title="จัดการลงทะเบียนและเช็คอิน">${iconSvg('users',15)}</button>`:''}${entity==='a0Participants'?`<button class="icon-action view-action" type="button" data-view-a0="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button>`:''}${entity==='jointCourses'?`<button class="icon-action view-action" type="button" data-view-a2="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button><button class="icon-action" type="button" data-budget-a2="${escapeHtml(row.id)}" title="งบการเงิน">${iconSvg('wallet',14)}</button>`:''}${entity==='potentialPartners'?`<button class="icon-action view-action" type="button" data-view-partner="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button>`:''}${entity==='schools'?`<button class="icon-action view-action" type="button" data-view-school="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button>`:''}${entity==='intlRelations'?`<button class="icon-action view-action" type="button" data-view-intl-relation="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button>`:''}${entity==='alumni'?`<button class="icon-action view-action" type="button" data-view-alumni="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button>`:''}${entity==='studentHistories'?`<button class="icon-action" type="button" data-open-student="${escapeHtml(row.id)}" title="ดูเส้นทาง">${iconSvg('arrowUpRight',15)}</button>`:''}<button class="icon-action" type="button" data-edit="${escapeHtml(row.id)}" title="แก้ไข">${iconSvg('edit',14)}</button><button class="icon-action delete-action" type="button" data-delete="${escapeHtml(row.id)}" title="ลบ">${iconSvg('trash',14)}</button></div></td></tr>`).join('')}</tbody></table>${rows.length?'':'<div class="empty-state">ไม่พบข้อมูล ลองเปลี่ยนคำค้นหาหรือตัวกรอง หรือเพิ่มรายการใหม่</div>'}</div>
-      <div class="table-foot"><span>${isCustomerGroups?`แสดง ${rows.length} จาก ${sourceRows.length} กลุ่ม · จัดเก็บในเบราว์เซอร์เครื่องนี้`:`แสดง ${rows.length} รายการ · ข้อมูลตัวอย่างยังไม่ใช่ข้อมูลจากฐานระบบจริง`}</span>${isCustomerGroups?'':`<button class="button button-quiet" data-action="reset-demo">คืนค่าข้อมูลตัวอย่าง</button>`}</div></section>`;
+      <div class="table-foot"><span>${isCustomerGroups?`แสดง ${rows.length} จาก ${sourceRows.length} กลุ่ม · จัดเก็บในเบราว์เซอร์เครื่องนี้`:isMembers?`แสดง ${rows.length} จาก ${sourceRows.length} รายการ`: `แสดง ${rows.length} รายการ · ข้อมูลตัวอย่างยังไม่ใช่ข้อมูลจากฐานระบบจริง`}</span>${isCustomerGroups||isMembers?'':`<button class="button button-quiet" data-action="reset-demo">คืนค่าข้อมูลตัวอย่าง</button>`}</div></section>`;
   }
   function renderAgreementsPage(){
     const schema=schemas.agreements;
@@ -534,6 +555,11 @@
   }
   function renderA0Shortcuts(){return `<div class="module-grid"><article class="module-card"><h3>ลงทะเบียนด้วยตัวเอง</h3><p>ผู้เข้าร่วมกรอกข้อมูลและสร้าง/จับคู่โปรไฟล์สมาชิกด้วยอีเมล</p><div class="big-number">A0</div></article><article class="module-card"><h3>เพิ่มโดยเจ้าหน้าที่</h3><p>เจ้าหน้าที่เพิ่มผู้เข้าร่วมและลงทะเบียนจากหน้ารายชื่อกิจกรรม</p><div class="big-number">Staff</div></article><article class="module-card"><h3>ป้องกันข้อมูลซ้ำ</h3><p>ใช้สมาชิกเดิมข้ามกิจกรรม และเช็คอินเดิมไม่เพิ่มยอดซ้ำ</p><div class="big-number">1 คน</div></article></div>`;}
   function formatCell(entity,key,row,rowIndex=0){
+    if(entity==='members'){
+      if(key==='customerCode')return `<span class="cell-primary">${escapeHtml(row.customerCode||row.id)}</span>`;
+      if(key==='customerType')return `<span class="tag ${row.customerType==='องค์กร'?'blue':'orange'}">${escapeHtml(row.customerType||'บุคคล')}</span>`;
+      if(key==='groups')return `<div class="customer-group-cell"><div class="customer-group-tags">${memberGroupCodes(row).map(group=>`<span class="tag blue">${escapeHtml(group)}</span>`).join('')||'<span class="muted">ยังไม่เลือกกลุ่ม</span>'}</div><button class="customer-group-manage" type="button" data-edit-member-groups="${escapeHtml(row.id)}">จัดการกลุ่ม</button></div>`;
+    }
     if(entity==='customerGroups'){
       if(key==='groupCode')return `<span class="tag orange">${escapeHtml(row.groupCode||'—')}</span>`;
       if(key==='classCode')return `<span class="cell-primary">${escapeHtml(row.classCode||'—')}</span>`;
@@ -953,17 +979,26 @@
     $('#recordForm').dataset.relatedGroup=defaults.relatedGroup||existing?.relatedGroup||'';$('#recordForm').dataset.relatedRecordId=defaults.relatedRecordId||existing?.relatedRecordId||'';delete $('#recordForm').dataset.openBudgetAfterSave;delete $('#recordForm').dataset.openPartnerAction;delete $('#recordForm').dataset.openSchoolAction;
     const formSubmit=$('#recordForm').querySelector('[type="submit"]');formSubmit.hidden=false;
     $$('.student-step-control').forEach(control=>control.remove());
+    $$('.member-a0-control').forEach(control=>control.remove());
     if(entity==='studentHistories'){
       currentStudentFormStep=1;
       const footer=$('#recordForm .modal-foot');
       footer.insertAdjacentHTML('beforeend','<button class="button button-quiet student-step-control" type="button" data-student-step-back hidden>ย้อนกลับ</button><button class="button button-primary student-step-control" type="button" data-student-step-next>ถัดไป</button>');
       formSubmit.hidden=true;
     }
+    if(entity==='members'){
+      const footer=$('#recordForm .modal-foot');
+      footer.insertAdjacentHTML('afterbegin',`<button class="button button-quiet member-a0-control" type="button" data-member-a0>${iconSvg('calendar',14)} กรอกข้อมูลกิจกรรม</button>`);
+      footer.querySelector('[data-member-a0]').addEventListener('click',()=>{const form=$('#recordForm');if(!form.reportValidity())return;form.dataset.openMemberA0='true';saveRecord(form);});
+    }
     $('#recordModal').classList.toggle('agreement-modal',entity==='agreements');
     const widePartnerForm=['potentialPartners','schools','intlRelations'].includes(entity);
+    const wideCustomerForm=entity==='members';
     $('#recordModal').classList.toggle('partner-modal',widePartnerForm);
+    $('#recordModal').classList.toggle('customer-modal',wideCustomerForm);
     $('#modalFields').classList.toggle('agreement-modal-body',entity==='agreements');
     $('#modalFields').classList.toggle('partner-modal-body',widePartnerForm);
+    $('#modalFields').classList.toggle('customer-modal-body',wideCustomerForm);
     if(entity==='agreements'){
       $('#modalFields').innerHTML=renderAgreementFields(existing,defaults);
       setupAgreementUpload();
@@ -973,7 +1008,7 @@
     let currentSection='';
     $('#modalFields').innerHTML=schema.fields.map(field=>{
       let sectionMarkup='';if(field.section&&field.section!==currentSection){currentSection=field.section;sectionMarkup=`<div class="form-section-title form-span-${['schools','intlRelations'].includes(entity)?3:2}">${escapeHtml(field.section)}</div>`;}
-      const generatedCode=field.autoCode?(entity==='activities'?nextActivityCode():entity==='a0Participants'?nextA0Code():entity==='jointCourses'?nextA2Code():entity==='alumni'?nextAlumniCode(existing?.cohortYear||defaults.cohortYear):entity==='studentHistories'?nextStudentCode(existing?.admissionYear||defaults.admissionYear):entity==='potentialPartners'?nextPotentialPartnerCode():entity==='schools'?nextSchoolCode():entity==='intlRelations'?nextIntlRelationCode():''):'';
+      const generatedCode=field.autoCode?(entity==='members'?nextMemberCode():entity==='activities'?nextActivityCode():entity==='a0Participants'?nextA0Code():entity==='jointCourses'?nextA2Code():entity==='alumni'?nextAlumniCode(existing?.cohortYear||defaults.cohortYear):entity==='studentHistories'?nextStudentCode(existing?.admissionYear||defaults.admissionYear):entity==='potentialPartners'?nextPotentialPartnerCode():entity==='schools'?nextSchoolCode():entity==='intlRelations'?nextIntlRelationCode():''):'';
       const value=entity==='schools'&&field.key==='incomeTotal'&&existing?schoolIncome(existing):(existing?.[field.key]??defaults[field.key]??(field.autoCode?generatedCode:entity==='budgets'&&field.key==='code'?nextBudgetCode():''));
       const required=field.required?'required':'';
       let input='';
@@ -981,11 +1016,13 @@
         const options=field.type==='member'?data('members').map(member=>({value:member.id,label:`${member.name} · ${member.email||member.category||'ไม่มีอีเมล'}`})):field.type==='activity'?allActivities().map(activity=>({value:activity.id,label:`${activity.activityCode||''} ${activity.name} · ${activity.round||'ไม่ระบุรอบ'} · ${activity.startDate||'ไม่ระบุวัน'}`})):(field.options||[]).map(option=>({value:option,label:option}));
         const noOptions=field.type==='member'&&!options.length?'ยังไม่มีสมาชิกในทะเบียนกลาง':field.type==='activity'&&!options.length?'ยังไม่มีกิจกรรม กรุณาสร้างกิจกรรมก่อน':'';
         input=`<select class="form-control" name="${field.key}" ${required} ${noOptions?'disabled':''}><option value="">${escapeHtml(noOptions||`เลือก${field.label}`)}</option>${options.map(option=>`<option value="${escapeHtml(option.value)}" ${String(value)===String(option.value)?'selected':''}>${escapeHtml(option.label)}</option>`).join('')}</select>`;
+      }else if(field.type==='radio-group'){
+        input=`<div class="customer-type-options" role="radiogroup" aria-label="${escapeHtml(field.label)}">${(field.options||[]).map(option=>`<label><input type="radio" name="${field.key}" value="${escapeHtml(option)}" ${String(value)===String(option)?'checked':''} ${required}><span>${escapeHtml(option)}</span></label>`).join('')}</div>`;
       }else if(field.type==='rating'){
         input=`<div class="rating-control" role="radiogroup" aria-label="${escapeHtml(field.label)}">${(field.options||[]).map(option=>`<label class="rating-option"><input type="radio" name="${field.key}" value="${escapeHtml(option)}" ${String(value)===String(option)?'checked':''} ${required}><span>${escapeHtml(option)}</span></label>`).join('')}</div>`;
       }else if(field.type==='checkbox-group'||field.type==='activity-multi'||field.type==='product-multi'){
         const selected=Array.isArray(value)?value:[];
-        const options=field.type==='activity-multi'?allActivities().map(activity=>({value:activity.id,label:`${activity.activityCode||''} ${activity.name} · ${activity.round||'ไม่ระบุรอบ'} · ${activity.startDate||'ไม่ระบุวัน'}`})):field.type==='product-multi'?data('products').map(product=>({value:product.id,label:`${product.name} · ${product.type||product.level||''}`})):(field.options||[]).map(option=>({value:option,label:option}));
+        const options=field.type==='activity-multi'?allActivities().map(activity=>({value:activity.id,label:`${activity.activityCode||''} ${activity.name} · ${activity.round||'ไม่ระบุรอบ'} · ${activity.startDate||'ไม่ระบุวัน'}`})):field.type==='product-multi'?data('products').map(product=>({value:product.id,label:`${product.name} · ${product.type||product.level||''}`})):entity==='members'&&field.key==='groups'?data('customerGroups').map(group=>({value:group.classCode,label:group.classCode})):(field.options||[]).map(option=>({value:option,label:option}));
         input=`<div class="checkbox-group">${options.map(option=>`<label class="check-option"><input type="checkbox" name="${field.key}" value="${escapeHtml(option.value)}" ${selected.includes(option.value)?'checked':''}><span>${escapeHtml(option.label)}</span></label>`).join('')||'<span class="small-label">ยังไม่มีข้อมูลให้เลือก</span>'}</div>`;
       }else if(field.type==='autocomplete'){
         const names=[...new Set(data('potentialPartners').map(row=>row.name).filter(Boolean))];
@@ -1002,6 +1039,19 @@
       const fieldMarkup=`${sectionMarkup}<div class="form-field ${spanClass} ${['checkbox-group','activity-multi','product-multi'].includes(field.type)?'form-field-check-group':''}"><label>${escapeHtml(field.label)}${field.required?' *':''}</label>${input}</div>`;
       return entity==='studentHistories'?`<div class="student-step-panel" data-student-step-panel="${studentStep}" data-active="${studentStep===1}">${fieldMarkup}</div>`:fieldMarkup;
     }).join('');
+    if(entity==='members'){
+      const customerTypeInputs=$$('#modalFields input[name="customerType"]');
+      const firstNameInput=$('#modalFields [name="firstName"]');
+      const lastNameInput=$('#modalFields [name="lastName"]');
+      const updateCustomerNameLabels=()=>{
+        const isOrganization=$('#modalFields input[name="customerType"]:checked')?.value==='องค์กร';
+        lastNameInput.required=!isOrganization;
+        firstNameInput.closest('.form-field').querySelector('label').textContent=isOrganization?'ชื่อองค์กร / ชื่อผู้ประสานงาน *':'ชื่อ / ชื่อผู้ประสานงาน *';
+        lastNameInput.closest('.form-field').querySelector('label').textContent=isOrganization?'นามสกุลผู้ประสานงาน (ถ้ามี)':'นามสกุล *';
+      };
+      customerTypeInputs.forEach(input=>input.addEventListener('change',updateCustomerNameLabels));
+      updateCustomerNameLabels();
+    }
     if(entity==='studentHistories'){
       $('#modalFields').insertAdjacentHTML('afterbegin','<div class="student-wizard-nav form-span-2" role="tablist" aria-label="ขั้นตอนข้อมูลนักเรียน"><button type="button" role="tab" class="active" aria-selected="true" data-student-step="1"><span>1</span> ข้อมูลนักเรียน</button><button type="button" role="tab" aria-selected="false" data-student-step="2"><span>2</span> ประวัติการศึกษา</button><button type="button" role="tab" aria-selected="false" data-student-step="3"><span>3</span> เกียรติยศ / รางวัล</button><button type="button" role="tab" aria-selected="false" data-student-step="4"><span>4</span> จบการศึกษา</button></div>');
       setupStudentWizard(1);
@@ -1030,6 +1080,7 @@
   async function saveRecord(form){
     if(form.dataset.entity==='agreements')return saveAgreementRecord(form);
     const openRelatedBudget=form.dataset.openBudgetAfterSave==='true';delete form.dataset.openBudgetAfterSave;
+    const openMemberA0=form.dataset.openMemberA0==='true';
     const openPartnerAction=form.dataset.openPartnerAction||'';delete form.dataset.openPartnerAction;
     const openSchoolAction=form.dataset.openSchoolAction||'';delete form.dataset.openSchoolAction;
     const openIntlAction=form.dataset.openIntlAction||'';delete form.dataset.openIntlAction;
@@ -1038,6 +1089,15 @@
     if(!form.reportValidity())return;
     if(['budgets','potentialPartners'].includes(entity)&&form.dataset.relatedGroup&&form.dataset.relatedRecordId){body.relatedGroup=form.dataset.relatedGroup;body.relatedRecordId=form.dataset.relatedRecordId;}
     const rows=data(entity);
+    if(entity==='members'){
+      body.customerCode=String(body.customerCode||'').trim().toLocaleUpperCase('en');
+      body.groups=Array.isArray(body.groups)?body.groups:[];
+      body.group=body.groups[0]||'';
+      body.name=[body.prefix,body.firstName,body.lastName].filter(Boolean).join(' ');
+      body.category=body.customerType||'บุคคล';
+      if(!recordId)body.status='ใช้งาน';
+      if(rows.some(row=>row.id!==recordId&&String(row.customerCode||'').trim().toLocaleUpperCase('en')===body.customerCode)){toast('รหัสรายการลูกค้านี้มีอยู่แล้ว');return;}
+    }
     if(entity==='customerGroups'&&rows.some(row=>row.id!==recordId&&String(row.groupCode||'').trim().toLocaleUpperCase('en')===String(body.groupCode||'').trim().toLocaleUpperCase('en')&&String(row.classCode||'').trim().toLocaleUpperCase('en')===String(body.classCode||'').trim().toLocaleUpperCase('en'))){toast('กลุ่มลูกค้านี้มี Class นี้อยู่แล้ว');return;}
     if(entity==='budgets'&&rows.some(row=>row.id!==recordId&&String(row.code||'').toLocaleUpperCase('en')===String(body.code||'').toLocaleUpperCase('en'))){toast('รหัสงบนี้มีอยู่แล้ว');return;}
     if(entity==='alumni'&&rows.some(row=>row.id!==recordId&&String(row.alumniCode||'').trim().toLocaleUpperCase('en')===String(body.alumniCode||'').trim().toLocaleUpperCase('en'))){toast('รหัส Alumni นี้มีอยู่แล้ว');return;}
@@ -1071,6 +1131,7 @@
       intlFile=form.elements.namedItem('supportingAttachment').files?.[0]||null;
       if(intlFile){const extension=intlFile.name.split('.').pop().toLocaleLowerCase('en');if(!['pdf','doc','docx','jpg','jpeg','png','xlsx','pptx'].includes(extension)){toast('ชนิดไฟล์ไม่รองรับ กรุณาเลือก PDF, Word, Excel, PowerPoint, JPG หรือ PNG');return;}if(intlFile.size>20*1024*1024){toast('ไฟล์มีขนาดเกิน 20 MB');return;}}
     }
+    delete form.dataset.openMemberA0;
     const savedId=recordId||id(entity==='a0Participants'?'A0':entity==='activities'?'EVT':entity==='jointCourses'?'JNT':entity==='intlRelations'?'INT':entity.slice(0,3).toUpperCase());
     if(entity==='intlRelations'&&intlFile){try{await saveIntlRelationAttachment(savedId,intlFile);body.attachmentName=intlFile.name;body.attachmentType=intlFile.type;body.attachmentSize=intlFile.size;}catch(error){console.warn('Could not save university attachment',error);toast('บันทึกเอกสารประกอบไม่สำเร็จ กรุณาลองอีกครั้ง');return;}}
     let savedRecord;
@@ -1099,6 +1160,7 @@
       if(linkedAgreement){linkedAgreement.partner=savedRecord.universityName;savedRecord.agreementId=linkedAgreement.id;savedRecord.agreementType=linkedAgreement.agreementType;}
     }
     saveState();$('#recordModal').close();toast(recordId?'ปรับปรุงข้อมูลแล้ว':'เพิ่มข้อมูลแล้ว');render();
+    if(entity==='members'&&openMemberA0&&savedRecord){go('a0Participants');openForm('a0Participants','',{memberId:savedRecord.id,recordedDate:today});}
     if(openRelatedBudget&&entity==='jointCourses'&&savedRecord)openBudgetForA2(savedRecord);
     if(openPartnerAction&&entity==='potentialPartners'&&savedRecord){if(openPartnerAction==='agreement')openAgreementForPartner(savedRecord);if(openPartnerAction==='budget')openBudgetForPartner(savedRecord);}
     if(openSchoolAction&&entity==='schools'&&savedRecord){if(openSchoolAction==='agreement')openAgreementForSchool(savedRecord);if(openSchoolAction==='budget')openBudgetForSchool(savedRecord);}
@@ -1182,6 +1244,7 @@
     $$('[data-open-agreement-file]',root).forEach(button=>button.addEventListener('click',()=>openAgreementFile(button.dataset.openAgreementFile)));
     $$('[data-upload-agreement-file]',root).forEach(button=>button.addEventListener('click',()=>openForm('agreements',button.dataset.uploadAgreementFile)));
     $$('[data-edit]',root).forEach(button=>button.addEventListener('click',()=>openForm(currentRoute,button.dataset.edit)));
+    $$('[data-edit-member-groups]',root).forEach(button=>button.addEventListener('click',()=>openForm('members',button.dataset.editMemberGroups)));
     $$('[data-delete]',root).forEach(button=>button.addEventListener('click',()=>deleteRecord(currentRoute,button.dataset.delete)));
     $$('[data-open-activity]',root).forEach(button=>button.addEventListener('click',()=>go(`activity:${button.dataset.openActivity}`)));
     $$('[data-create-a0-member]',root).forEach(button=>button.addEventListener('click',()=>{const activity=allActivities().find(row=>row.id===currentActivityId);openForm('a0Participants','',{memberId:button.dataset.createA0Member,activityId:currentActivityId,recordedDate:today,owner:activity?.owner||''});}));
@@ -1189,6 +1252,7 @@
     $$('[data-add-journey]',root).forEach(button=>button.addEventListener('click',()=>{journeyFormOpen=true;render();}));
     $$('[data-mode]',root).forEach(button=>button.addEventListener('click',()=>{activityMode=button.dataset.mode;render();}));
     const search=$('#entitySearch',root);if(search)search.addEventListener('input',()=>{window.entitySearch=search.value;const position=search.selectionStart;render();const refreshed=$('#entitySearch');refreshed?.focus();refreshed?.setSelectionRange(position,position);});
+    $$('[data-member-group-filter]',root).forEach(input=>input.addEventListener('change',()=>{window.memberGroupFilter=$$('[data-member-group-filter]:checked',$('#content')).map(option=>option.value);render();}));
     const status=$('#statusFilter',root);if(status)status.addEventListener('change',()=>{entityStatusByRoute[currentRoute]=status.value;render();});
     const agreementStatus=$('#agreementStatusFilter',root);if(agreementStatus)agreementStatus.addEventListener('change',()=>{entityStatusByRoute.agreements=agreementStatus.value;render();});
     const agreementStart=$('#agreementStartFilter',root);if(agreementStart)agreementStart.addEventListener('change',()=>{window.agreementStartFrom=agreementStart.value;render();});
@@ -1222,5 +1286,6 @@
   // Browsers otherwise expose named inputs on window and overwrite these search values.
   window.entitySearch='';
   window.agreementSearch='';
+  window.memberGroupFilter=[];
   renderNav();currentRoute=location.hash.replace('#','')||'overview';render();
 })();
