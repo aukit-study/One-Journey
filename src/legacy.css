@@ -1760,16 +1760,34 @@ textarea:focus-visible {
     min-height: 52px;
     padding: 10px 13px;
     border-radius: 14px;
-    background: linear-gradient(105deg, #ff641d, #ff6c22);
-    color: #fff;
-    font-weight: 650
+    background: transparent;
+    color: #655e57;
+    font-weight: 600
 }
 
-.nav-primary-toggle:hover,
 .nav-primary-toggle.route-active,
-.nav-primary-toggle[aria-expanded="true"] {
+.nav-primary-toggle.route-active:hover {
     background: linear-gradient(105deg, #ff641d, #ff6c22);
     color: #fff
+}
+
+.nav-category {
+    padding: 1px 0 2px
+}
+
+.nav-category-label {
+    padding: 8px 13px 3px;
+    color: #a78a76;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3
+}
+
+.nav-category-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-left: 8px
 }
 
 .nav-chevron {
@@ -1794,27 +1812,6 @@ textarea:focus-visible {
 
 .nav-disclosure-content[hidden] {
     display: none
-}
-
-.nav-disclosure-nested {
-    margin: 2px 0 1px 4px
-}
-
-.nav-nested-toggle {
-    min-height: 43px;
-    padding: 8px 10px;
-    color: #514942;
-    font-weight: 600
-}
-
-.nav-nested-toggle.route-active {
-    color: #df6728
-}
-
-.nav-nested-content {
-    margin-left: 10px;
-    padding: 3px 0 4px 8px;
-    border-left: 1px solid #f0ddd0
 }
 
 .nav-link-compact {
