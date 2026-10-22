@@ -177,7 +177,7 @@ function Topbar({ account, onLogout }) {
     <header className="topbar">
       <div className="breadcrumb">
         <button className="icon-button mobile-menu" id="mobileMenu" type="button" aria-label="เปิดเมนู"><Icon name="menu" /></button>
-        <a className="breadcrumb-home" href="#overview">One Journey</a><b>/</b><strong id="breadcrumbTitle">หน้าหลัก</strong>
+        <span id="breadcrumbTitle" className="sr-only">หน้าหลัก</span>
       </div>
       <form className="global-search" id="globalSearch">
         <span aria-hidden="true"><Icon name="search" size={19} /></span>
