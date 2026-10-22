@@ -3749,35 +3749,127 @@ tbody tr:hover .row-actions {
 }
 
 /* Readability baseline: 16px for primary text, with compact metadata kept at 12–14px. */
-body { font-size: 16px; }
-.brand-mark, .nav-link, .nav-icon, .global-search input, .search-control, .form-control,
-.agreement-modal-body .form-control, .partner-modal-body .form-control { font-size: 16px; }
-.brand-copy strong, .system-note strong, .top-user strong, .profile-copy strong,
-.panel-head h2, .module-card h3, .section-title, .activity-head h2, .agreement-form-title,
-.form-section-title, .student-profile-card h3 { font-size: 16px; }
-.sidebar-caption, .nav-group-label, .nav-count, .brand-copy small, .system-note small,
-.avatar.small, .profile-copy small, .top-user small, .breadcrumb, .eyebrow, .stat-note, .panel-head p,
-.chart-legend, .bar-label, .donut-label, .quick-link small, .unit-row, .cell-secondary,
-.table-foot, .chip, .timeline-dot, .timeline-date, .timeline-copy small, .welcome-kicker,
-.welcome-chip b, .a2-finance-action small, .partner-related-actions > small,
-.student-wizard-nav button span { font-size: 12px; }
-.avatar, .page-head p, .global-search button, .demo-banner button, .button,
-.small-label, .stat-label, .legend-row, .quick-link, .quick-link strong, .cell-primary,
-th, td, .icon-action, .empty-state, .module-card p, .activity-head p, .form-field label,
-.notice-card, .timeline-copy strong, .form-error, .toast, .welcome-chip,
-.filter-row > .small-label:first-child, .chart-empty, .agreement-filter-field > label,
-.file-cell-button, .agreement-modal-body .form-field label, .agreement-upload-dropzone strong,
-.agreement-file-name, .row-actions .button, .partner-modal-body .form-field label,
-.check-option, .school-agreement-link, .student-wizard-nav button, .student-profile-card p {
-    font-size: 14px;
+body {
+    font-size: 16px;
 }
-.demo-banner, .stat-note, .quick-link small, .tag, .cell-secondary, .timeline-date,
-.timeline-copy small, .agreement-upload-dropzone small, .score-badge,
-.rating-option span, .partner-type-tags .tag, .partner-related-actions > small {
+
+.brand-mark,
+.nav-link,
+.nav-icon,
+.global-search input,
+.search-control,
+.form-control,
+.agreement-modal-body .form-control,
+.partner-modal-body .form-control {
+    font-size: 16px;
+}
+
+.brand-copy strong,
+.system-note strong,
+.top-user strong,
+.profile-copy strong,
+.panel-head h2,
+.module-card h3,
+.section-title,
+.activity-head h2,
+.agreement-form-title,
+.form-section-title,
+.student-profile-card h3 {
+    font-size: 16px;
+}
+
+.sidebar-caption,
+.nav-group-label,
+.nav-count,
+.brand-copy small,
+.system-note small,
+.avatar.small,
+.profile-copy small,
+.top-user small,
+.breadcrumb,
+.eyebrow,
+.stat-note,
+.panel-head p,
+.chart-legend,
+.bar-label,
+.donut-label,
+.quick-link small,
+.unit-row,
+.cell-secondary,
+.table-foot,
+.chip,
+.timeline-dot,
+.timeline-date,
+.timeline-copy small,
+.welcome-kicker,
+.welcome-chip b,
+.a2-finance-action small,
+.partner-related-actions>small,
+.student-wizard-nav button span {
     font-size: 12px;
 }
-.form-control, .agreement-modal-body .form-control, .partner-modal-body .form-control,
-.global-search input, .search-control { font-size: 16px; }
+
+.avatar,
+.page-head p,
+.global-search button,
+.demo-banner button,
+.button,
+.small-label,
+.stat-label,
+.legend-row,
+.quick-link,
+.quick-link strong,
+.cell-primary,
+th,
+td,
+.icon-action,
+.empty-state,
+.module-card p,
+.activity-head p,
+.form-field label,
+.notice-card,
+.timeline-copy strong,
+.form-error,
+.toast,
+.welcome-chip,
+.filter-row>.small-label:first-child,
+.chart-empty,
+.agreement-filter-field>label,
+.file-cell-button,
+.agreement-modal-body .form-field label,
+.agreement-upload-dropzone strong,
+.agreement-file-name,
+.row-actions .button,
+.partner-modal-body .form-field label,
+.check-option,
+.school-agreement-link,
+.student-wizard-nav button,
+.student-profile-card p {
+    font-size: 14px;
+}
+
+.demo-banner,
+.stat-note,
+.quick-link small,
+.tag,
+.cell-secondary,
+.timeline-date,
+.timeline-copy small,
+.agreement-upload-dropzone small,
+.score-badge,
+.rating-option span,
+.partner-type-tags .tag,
+.partner-related-actions>small {
+    font-size: 12px;
+}
+
+.form-control,
+.agreement-modal-body .form-control,
+.partner-modal-body .form-control,
+.global-search input,
+.search-control {
+    font-size: 16px;
+}
 
 /* Keep list actions on the same toolbar row as search and status filters. */
 .list-toolbar {
@@ -3917,6 +4009,23 @@ th, td, .icon-action, .empty-state, .module-card p, .activity-head p, .form-fiel
     scrollbar-color: #d9dce3 transparent;
 }
 
+.customer-groups-toolbar .search-control {
+    max-width: 420px;
+}
+
+.customer-form-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #d75f1f;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.customer-form-link:hover {
+    text-decoration: underline;
+}
+
 .group-tab {
     display: flex;
     flex: 1 0 96px;
@@ -3941,8 +4050,8 @@ th, td, .icon-action, .empty-state, .module-card p, .activity-head p, .form-fiel
 }
 
 .group-tab[aria-current="page"] {
-    border-color: #155eef;
-    background: #155eef;
+    border-color: #ff9a45;
+    background: #ff9a45 ;
     color: #fff;
 }
 

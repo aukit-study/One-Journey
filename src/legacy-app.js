@@ -30,7 +30,8 @@
     check:'<path d="m5 12 4 4L19 6"/>',
     circle:'<circle cx="12" cy="12" r="9"/>',
     mapPin:'<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
-    arrowLeft:'<path d="m15 18-6-6 6-6M9 12h12"/>'
+    arrowLeft:'<path d="m15 18-6-6 6-6M9 12h12"/>',
+    refresh:'<path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 9a7 7 0 0 1 11.6-2L20 12M4 12l2.8 5a7 7 0 0 0 11.6-2"/>'
   };
   const iconSvg = (name, size = 16) => `<svg class="ui-icon" aria-hidden="true" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${iconPaths[name] || iconPaths.circle}</svg>`;
   const id = prefix => `${prefix}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
@@ -94,10 +95,23 @@
       {key:'advisor',label:'อาจารย์ / ผู้ประสานงาน',type:'text',section:'2. ประวัติการศึกษา',formStep:2},{key:'educationNotes',label:'บันทึกประวัติการศึกษา',type:'textarea',wide:true,formStep:2},
       {key:'scholarshipSummary',label:'ทุนการศึกษา (สรุป)',type:'textarea',wide:true,section:'3. เกียรติยศ / รางวัล',formStep:3},{key:'awardsSummary',label:'เกียรติยศ / รางวัล (สรุป)',type:'textarea',wide:true,formStep:3},{key:'awardCount',label:'จำนวนรางวัล',type:'number',step:'1',formStep:3},{key:'supportNotes',label:'หมายเหตุทุน / รางวัล',type:'textarea',wide:true,formStep:3},
       {key:'graduationYear',label:'ปีที่จบการศึกษา',type:'select',options:Array.from({length:21},(_,index)=>String(2570-index)),section:'4. จบการศึกษา',formStep:4},{key:'graduationResult',label:'สถานะการจบ',type:'select',options:['ยังไม่จบ','สำเร็จการศึกษา','กำลังดำเนินการ','อื่น ๆ'],formStep:4},{key:'graduationNotes',label:'รายละเอียดการจบการศึกษา',type:'textarea',wide:true,formStep:4},{key:'notes',label:'หมายเหตุเพิ่มเติม',type:'textarea',wide:true,formStep:4}
+    ]},
+    customerGroups: {title:'จัดการกลุ่มลูกค้า', singular:'กลุ่มลูกค้า', description:'กำหนดรหัสกลุ่ม Class คำอธิบาย และลิงก์แบบฟอร์มสำหรับบันทึกข้อมูลแต่ละกลุ่ม', columns:[['groupCode','รหัสกลุ่มลูกค้า'],['classCode','Class'],['description','คำอธิบายรหัสกลุ่มลูกค้า'],['formUrl','Link แบบฟอร์ม']], fields:[
+      {key:'groupCode',label:'กลุ่มลูกค้า',type:'text',required:true,placeholder:'เช่น A, B, C หรือ D'},{key:'classCode',label:'Class',type:'text',required:true,placeholder:'เช่น A0, B1 หรือ C'},{key:'description',label:'คำอธิบาย',type:'textarea',wide:true,placeholder:'อธิบายประเภทข้อมูลหรือกลุ่มผู้ใช้งาน'},{key:'formUrl',label:'Link แบบฟอร์ม',type:'url',wide:true,placeholder:'วางลิงก์ Google Forms หรือแบบฟอร์มที่ใช้อยู่ (ถ้ามี)'}
     ]}
   };
 
   const seed = {
+    customerGroups:[
+      {id:'CG-A0',groupCode:'A',classCode:'A0',description:'ผู้เข้าร่วมค่าย / Workshop / Open House',formUrl:''},
+      {id:'CG-A1',groupCode:'A',classCode:'A1',description:'ผู้สมัครหลักสูตร',formUrl:''},
+      {id:'CG-A2',groupCode:'A',classCode:'A2',description:'หลักสูตรร่วม / Inter / Short Course',formUrl:''},
+      {id:'CG-B0',groupCode:'B',classCode:'B0',description:'Potential Partner / พันธมิตรที่คาดหวัง',formUrl:''},
+      {id:'CG-B1',groupCode:'B',classCode:'B1',description:'โรงเรียนคู่ความร่วมมือ',formUrl:''},
+      {id:'CG-B2',groupCode:'B',classCode:'B2',description:'มหาวิทยาลัย / วิเทศสัมพันธ์',formUrl:''},
+      {id:'CG-C',groupCode:'C',classCode:'C',description:'ศิษย์เก่า',formUrl:''},
+      {id:'CG-D',groupCode:'D',classCode:'D',description:'ประวัตินักเรียนตั้งแต่เริ่มศึกษาจนจบการศึกษา',formUrl:''}
+    ],
     budgets:[
       {id:'BUD-001',code:'BG-240001',projectName:'ค่ายทดลองเรียนสื่อดิจิทัล (ตัวอย่าง)',incomeTotal:0,expenseTotal:24800,type:'Camp',owner:'หน่วยพัฒนานักศึกษา'},
       {id:'BUD-002',code:'BG-240002',projectName:'Workshop สร้างสรรค์ด้วย AI (ตัวอย่าง)',incomeTotal:86500,expenseTotal:0,type:'Workshop',owner:'BRIDGE'},
@@ -324,6 +338,10 @@
             });
             try{localStorage.setItem(STORE_KEY,JSON.stringify(parsed));}catch(error){console.warn('Could not migrate student history records',error);}
           }
+          if(!Array.isArray(parsed.data.customerGroups)){
+            parsed.data.customerGroups=parsed.demo?structuredClone(seed.customerGroups):[];
+            try{localStorage.setItem(STORE_KEY,JSON.stringify(parsed));}catch(error){console.warn('Could not initialize customer groups',error);}
+          }
           return parsed;
         }
       }
@@ -381,7 +399,8 @@
     {label:'งบประมาณและความร่วมมือ',items:[['budgets','งบประมาณรายได้','wallet'],['agreements','MOU / MOA','handshake']]},
     {label:'กลุ่มลูกค้า A',items:[['members','ทะเบียนสมาชิกกลาง','users'],['a0Participants','A0 · ผู้เข้าร่วมกิจกรรม','users'],['activities','กิจกรรม','calendar'],['applicants','A1 · ผู้สมัครหลักสูตร','user'],['jointCourses','A2 · Joint / Inter / Short Course','book'],['products','ทะเบียนโปรดัก / หลักสูตร','package']]},
     {label:'เครือข่ายกลุ่ม B',items:[['potentialPartners','B0 · Potential Partner','network'],['schools','B1 · โรงเรียนคู่ความร่วมมือ','school'],['intlRelations','B2 · มหาวิทยาลัย / วิเทศสัมพันธ์','globe']]},
-    {label:'บุคคลและเส้นทางการศึกษา',items:[['alumni','C · ศิษย์เก่า','graduation'],['studentHistories','D · ประวัตินักเรียน','route']]}
+    {label:'บุคคลและเส้นทางการศึกษา',items:[['alumni','C · ศิษย์เก่า','graduation'],['studentHistories','D · ประวัตินักเรียน','route']]},
+    {label:'ตั้งค่าระบบ',items:[['customerGroups','จัดการกลุ่มลูกค้า','users']]}
   ];
   const groupTabs=[
     ['a0Participants','A0','ผู้เข้าร่วมกิจกรรม'],
@@ -471,7 +490,8 @@
   function renderEntityPage(entity){
     if(entity==='agreements')return renderAgreementsPage();
     const schema=schemas[entity];
-    const actions=`${button('ส่งออก CSV','export-csv','button-quiet','download')}${button('เพิ่ม'+schema.singular,'add-record','button-primary','plus')}`;
+    const isCustomerGroups=entity==='customerGroups';
+    const actions=isCustomerGroups?`${button('Refresh ข้อมูล','refresh-records','button-quiet','refresh')}${button('สร้างกลุ่มลูกค้า','add-record','button-primary','plus')}`:`${button('ส่งออก CSV','export-csv','button-quiet','download')}${button('เพิ่ม'+schema.singular,'add-record','button-primary','plus')}`;
     const q=(window.entitySearch||'').trim().toLocaleLowerCase('th');
     const sourceRows=data(entity);
     const statusOptions=[...new Set(sourceRows.map(row=>entity==='budgets'?budgetOutcome(row):entity==='schools'?schoolStatus(row):entity==='intlRelations'?intlRelationStatus(row):entity==='alumni'?row.employmentStatus:entity==='studentHistories'?row.currentStage:row.status).filter(Boolean))];
@@ -484,10 +504,10 @@
     });
     const tableClass=entity==='a0Participants'?'a0-table':entity==='activities'?'activity-table':entity==='jointCourses'?'a2-table':entity==='potentialPartners'?'potential-partner-table':entity==='schools'?'school-partner-table':entity==='intlRelations'?'international-partner-table':entity==='alumni'?'alumni-table':entity==='studentHistories'?'student-table':'';
     return `${setHeading(schema.title,schema.description,'',false)}
-      <div class="filter-row list-toolbar"><input class="search-control" id="entitySearch" type="search" placeholder="ค้นหาใน${escapeHtml(schema.title)}" value="${escapeHtml(window.entitySearch||'')}"><select class="field-control" id="statusFilter"><option value="all">ทุกสถานะ</option>${statusOptions.map(status=>`<option value="${escapeHtml(status)}" ${selectedStatus===status?'selected':''}>${escapeHtml(status)}</option>`).join('')}</select><span class="filter-spacer"></span>${toolbarActions(actions)}</div>
-      <section class="panel data-panel"><div class="panel-head"><div><h2>${escapeHtml(schema.title)}</h2><p>${entity==='activities'?'จัดการกิจกรรมและรอบ ส่วนรายชื่อผู้เข้าร่วมและเช็คอินอยู่ในรายละเอียดกิจกรรม':entity==='a0Participants'?'ข้อมูลผู้เข้าร่วมที่เชื่อมกับสมาชิกเดิมและกิจกรรม/รอบ':entity==='jointCourses'?'ข้อมูลโครงการ A2 ตามประเภท ความต้องการผู้เรียน และสถานะการติดตาม':entity==='potentialPartners'?'ติดตามองค์กรเป้าหมาย ระดับโอกาส ความร่วมมือ และขั้นตอนถัดไป · เพิ่มชื่อใหม่ได้จากฟอร์ม':entity==='schools'?'เชื่อมโรงเรียนกับกิจกรรมและหลักสูตรที่เกี่ยวข้อง พร้อมเปิดหน้ารายการต้นทางได้':entity==='intlRelations'?'ติดตามความร่วมมือกับมหาวิทยาลัยต่างประเทศ นักศึกษาแลกเปลี่ยน กิจกรรม เอกสาร และรายได้/ทุน':entity==='alumni'?'ข้อมูลศิษย์เก่าตามภาพตัวอย่าง · ข้อมูลในหน้านี้เป็นข้อมูลสาธิต':'ข้อมูลตัวอย่าง · ใช้ปุ่มแก้ไขเพื่อปรับระเบียนในเครื่อง'}</p></div><span class="tag orange">${rows.length} รายการ</span></div>
+      <div class="filter-row list-toolbar ${isCustomerGroups?'customer-groups-toolbar':''}"><input class="search-control" id="entitySearch" type="search" placeholder="ค้นหาใน${escapeHtml(schema.title)}" value="${escapeHtml(window.entitySearch||'')}">${isCustomerGroups?'':`<select class="field-control" id="statusFilter"><option value="all">ทุกสถานะ</option>${statusOptions.map(status=>`<option value="${escapeHtml(status)}" ${selectedStatus===status?'selected':''}>${escapeHtml(status)}</option>`).join('')}</select>`}<span class="filter-spacer"></span>${isCustomerGroups?`<div class="toolbar-actions">${actions}</div>`:toolbarActions(actions)}</div>
+      <section class="panel data-panel"><div class="panel-head"><div><h2>${escapeHtml(schema.title)}</h2><p>${isCustomerGroups?'จัดการรหัสกลุ่มและ Class ให้สอดคล้องกับทะเบียน A0–D · เพิ่มลิงก์แบบฟอร์มได้เมื่อพร้อม':entity==='activities'?'จัดการกิจกรรมและรอบ ส่วนรายชื่อผู้เข้าร่วมและเช็คอินอยู่ในรายละเอียดกิจกรรม':entity==='a0Participants'?'ข้อมูลผู้เข้าร่วมที่เชื่อมกับสมาชิกเดิมและกิจกรรม/รอบ':entity==='jointCourses'?'ข้อมูลโครงการ A2 ตามประเภท ความต้องการผู้เรียน และสถานะการติดตาม':entity==='potentialPartners'?'ติดตามองค์กรเป้าหมาย ระดับโอกาส ความร่วมมือ และขั้นตอนถัดไป · เพิ่มชื่อใหม่ได้จากฟอร์ม':entity==='schools'?'เชื่อมโรงเรียนกับกิจกรรมและหลักสูตรที่เกี่ยวข้อง พร้อมเปิดหน้ารายการต้นทางได้':entity==='intlRelations'?'ติดตามความร่วมมือกับมหาวิทยาลัยต่างประเทศ นักศึกษาแลกเปลี่ยน กิจกรรม เอกสาร และรายได้/ทุน':entity==='alumni'?'ข้อมูลศิษย์เก่าตามภาพตัวอย่าง · ข้อมูลในหน้านี้เป็นข้อมูลสาธิต':'ข้อมูลตัวอย่าง · ใช้ปุ่มแก้ไขเพื่อปรับระเบียนในเครื่อง'}</p></div><span class="tag orange">${rows.length} รายการ</span></div>
       <div class="table-scroll"><table class="${tableClass}"><thead><tr>${schema.columns.map(([,label])=>`<th>${escapeHtml(label)}</th>`).join('')}<th>จัดการ</th></tr></thead><tbody>${rows.map((row,rowIndex)=>`<tr>${schema.columns.map(([key])=>`<td>${formatCell(entity,key,row,rowIndex)}</td>`).join('')}<td><div class="row-actions">${entity==='budgets'?`<button class="icon-action view-action" type="button" data-view-budget="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button>`:''}${entity==='activities'?`<button class="icon-action" type="button" data-open-activity="${escapeHtml(row.id)}" title="จัดการลงทะเบียนและเช็คอิน">${iconSvg('users',15)}</button>`:''}${entity==='a0Participants'?`<button class="icon-action view-action" type="button" data-view-a0="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button>`:''}${entity==='jointCourses'?`<button class="icon-action view-action" type="button" data-view-a2="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button><button class="icon-action" type="button" data-budget-a2="${escapeHtml(row.id)}" title="งบการเงิน">${iconSvg('wallet',14)}</button>`:''}${entity==='potentialPartners'?`<button class="icon-action view-action" type="button" data-view-partner="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button>`:''}${entity==='schools'?`<button class="icon-action view-action" type="button" data-view-school="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button>`:''}${entity==='intlRelations'?`<button class="icon-action view-action" type="button" data-view-intl-relation="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button>`:''}${entity==='alumni'?`<button class="icon-action view-action" type="button" data-view-alumni="${escapeHtml(row.id)}" title="ดูรายละเอียด">${iconSvg('eye',14)}</button>`:''}${entity==='studentHistories'?`<button class="icon-action" type="button" data-open-student="${escapeHtml(row.id)}" title="ดูเส้นทาง">${iconSvg('arrowUpRight',15)}</button>`:''}<button class="icon-action" type="button" data-edit="${escapeHtml(row.id)}" title="แก้ไข">${iconSvg('edit',14)}</button><button class="icon-action delete-action" type="button" data-delete="${escapeHtml(row.id)}" title="ลบ">${iconSvg('trash',14)}</button></div></td></tr>`).join('')}</tbody></table>${rows.length?'':'<div class="empty-state">ไม่พบข้อมูล ลองเปลี่ยนคำค้นหาหรือตัวกรอง หรือเพิ่มรายการใหม่</div>'}</div>
-      <div class="table-foot"><span>แสดง ${rows.length} รายการ · ข้อมูลตัวอย่างยังไม่ใช่ข้อมูลจากฐานระบบจริง</span><button class="button button-quiet" data-action="reset-demo">คืนค่าข้อมูลตัวอย่าง</button></div></section>`;
+      <div class="table-foot"><span>${isCustomerGroups?`แสดง ${rows.length} จาก ${sourceRows.length} กลุ่ม · จัดเก็บในเบราว์เซอร์เครื่องนี้`:`แสดง ${rows.length} รายการ · ข้อมูลตัวอย่างยังไม่ใช่ข้อมูลจากฐานระบบจริง`}</span>${isCustomerGroups?'':`<button class="button button-quiet" data-action="reset-demo">คืนค่าข้อมูลตัวอย่าง</button>`}</div></section>`;
   }
   function renderAgreementsPage(){
     const schema=schemas.agreements;
@@ -514,6 +534,15 @@
   }
   function renderA0Shortcuts(){return `<div class="module-grid"><article class="module-card"><h3>ลงทะเบียนด้วยตัวเอง</h3><p>ผู้เข้าร่วมกรอกข้อมูลและสร้าง/จับคู่โปรไฟล์สมาชิกด้วยอีเมล</p><div class="big-number">A0</div></article><article class="module-card"><h3>เพิ่มโดยเจ้าหน้าที่</h3><p>เจ้าหน้าที่เพิ่มผู้เข้าร่วมและลงทะเบียนจากหน้ารายชื่อกิจกรรม</p><div class="big-number">Staff</div></article><article class="module-card"><h3>ป้องกันข้อมูลซ้ำ</h3><p>ใช้สมาชิกเดิมข้ามกิจกรรม และเช็คอินเดิมไม่เพิ่มยอดซ้ำ</p><div class="big-number">1 คน</div></article></div>`;}
   function formatCell(entity,key,row,rowIndex=0){
+    if(entity==='customerGroups'){
+      if(key==='groupCode')return `<span class="tag orange">${escapeHtml(row.groupCode||'—')}</span>`;
+      if(key==='classCode')return `<span class="cell-primary">${escapeHtml(row.classCode||'—')}</span>`;
+      if(key==='formUrl'){
+        const value=String(row.formUrl||'').trim();if(!value)return '<span class="muted">ยังไม่ได้เพิ่มลิงก์</span>';
+        try{const url=new URL(value);if(['http:','https:'].includes(url.protocol))return `<a class="customer-form-link" href="${escapeHtml(url.href)}" target="_blank" rel="noopener noreferrer">เปิดแบบฟอร์ม ${iconSvg('arrowUpRight',13)}</a>`;}catch{}
+        return `<span>${escapeHtml(value)}</span>`;
+      }
+    }
     if(entity==='alumni'){
       const fullName=[row.prefix,row.firstName,row.lastName].filter(Boolean).join(' ');
       if(key==='sequence')return String(rowIndex+1);
@@ -1009,6 +1038,7 @@
     if(!form.reportValidity())return;
     if(['budgets','potentialPartners'].includes(entity)&&form.dataset.relatedGroup&&form.dataset.relatedRecordId){body.relatedGroup=form.dataset.relatedGroup;body.relatedRecordId=form.dataset.relatedRecordId;}
     const rows=data(entity);
+    if(entity==='customerGroups'&&rows.some(row=>row.id!==recordId&&String(row.groupCode||'').trim().toLocaleUpperCase('en')===String(body.groupCode||'').trim().toLocaleUpperCase('en')&&String(row.classCode||'').trim().toLocaleUpperCase('en')===String(body.classCode||'').trim().toLocaleUpperCase('en'))){toast('กลุ่มลูกค้านี้มี Class นี้อยู่แล้ว');return;}
     if(entity==='budgets'&&rows.some(row=>row.id!==recordId&&String(row.code||'').toLocaleUpperCase('en')===String(body.code||'').toLocaleUpperCase('en'))){toast('รหัสงบนี้มีอยู่แล้ว');return;}
     if(entity==='alumni'&&rows.some(row=>row.id!==recordId&&String(row.alumniCode||'').trim().toLocaleUpperCase('en')===String(body.alumniCode||'').trim().toLocaleUpperCase('en'))){toast('รหัส Alumni นี้มีอยู่แล้ว');return;}
     if(entity==='studentHistories'){
@@ -1138,7 +1168,7 @@
 
   function bindActions(root){
     $$('[data-route]',root).forEach(button=>button.addEventListener('click',event=>{event.preventDefault();go(button.dataset.route);}));
-    $$('[data-action]',root).forEach(button=>button.addEventListener('click',()=>{const action=button.dataset.action;if(action==='add-record')openForm(currentRoute);if(action==='export-csv')exportCsv(currentRoute);if(action==='download-json')downloadJson();if(action==='reset-demo')resetDemo();}));
+    $$('[data-action]',root).forEach(button=>button.addEventListener('click',()=>{const action=button.dataset.action;if(action==='add-record')openForm(currentRoute);if(action==='export-csv')exportCsv(currentRoute);if(action==='download-json')downloadJson();if(action==='reset-demo')resetDemo();if(action==='refresh-records'){window.entitySearch='';entityStatusByRoute[currentRoute]='all';state=loadState();render();toast('โหลดรายการกลุ่มลูกค้าล่าสุดแล้ว');}}));
     $$('[data-view-budget]',root).forEach(button=>button.addEventListener('click',()=>openBudgetView(button.dataset.viewBudget)));
     $$('[data-view-a0]',root).forEach(button=>button.addEventListener('click',()=>openA0View(button.dataset.viewA0)));
     $$('[data-view-a2]',root).forEach(button=>button.addEventListener('click',()=>openA2View(button.dataset.viewA2)));
