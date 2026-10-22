@@ -894,6 +894,21 @@ a {
     overflow: hidden
 }
 
+.customer-groups-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: max(470px, calc(100vh - 190px));
+}
+
+.customer-groups-panel .table-scroll {
+    flex: 1;
+    min-height: 0;
+}
+
+.customer-groups-table tbody tr {
+    height: clamp(52px, calc((100vh - 320px) / var(--customer-group-count, 8)), 62px);
+}
+
 .table-toolbar {
     display: flex;
     align-items: center;
